@@ -12,11 +12,20 @@ public interface MeetingApiService {
 
 
     /**
-     * Get all Meetings
+     * Get all Meetings in order of date
      *
      * @return {@link List}
      */
-    List<Meeting> getMeetings();
+    List<Meeting> getMeetingsOrder();
+
+
+    /**
+     * Get all Meetings in Reverse order of date
+     *
+     * @return {@link List}
+     */
+    List<Meeting> getMeetingsReverseOrder();
+
 
 
     /**
@@ -25,6 +34,16 @@ public interface MeetingApiService {
      * @param meeting
      */
     void deleteMeeting(Meeting meeting);
+
+
+
+    /**
+     * Get all Meetings in order of Rooms
+     *
+     * @return {@link List}
+     */
+    List<Meeting> getMeetingsByRoom();
+
 
 
     /**

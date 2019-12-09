@@ -14,7 +14,7 @@ import com.guzzler13.mareunion.service.MeetingApiService;
 import java.util.List;
 
 public class MeetingListActivity extends AppCompatActivity {
-     private MeetingApiService mApiService;
+    private MeetingApiService mApiService;
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mMeetingListAdapter;
@@ -33,7 +33,12 @@ public class MeetingListActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        List<Meeting> mMeetings = mApiService.getMeetings();
+        List<Meeting> mMeetings = mApiService.getMeetingsOrder();
+
+
+
+
+
         mMeetingListAdapter = new MeetingListAdapter(mMeetings);
         mRecyclerView.setAdapter(mMeetingListAdapter);
 

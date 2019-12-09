@@ -2,17 +2,18 @@ package com.guzzler13.mareunion.model;
 
 import org.joda.time.DateTime;
 
-public class Meeting {
+public class Meeting implements Comparable<Meeting>{
 
     private Integer id;
     private String name;
     private DateTime dateBegin;
     private DateTime dateEnd;
     private String participants;
-    private String meetingRoom;
+    private Integer meetingRoom;
     private Boolean isReserved;
 
-    public Meeting(Integer id, String name, DateTime dateBegin, DateTime dateEnd, String participants, String meetingRoom) {
+
+    public Meeting(Integer id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Integer meetingRoom) {
         this.id = id;
         this.name = name;
         this.dateBegin = dateBegin;
@@ -46,8 +47,8 @@ public class Meeting {
         this.name = name;
     }
 
-    public String getDateBegin() {
-        return dateBegin.toString();
+    public DateTime getDateBegin() {
+        return dateBegin;
     }
 
     public void setDateBegin(DateTime dateBegin) {
@@ -70,11 +71,19 @@ public class Meeting {
         this.participants = participants;
     }
 
-    public String getMeetingRoom() {
+    public int getMeetingRoom() {
         return meetingRoom;
     }
 
-    public void setMeetingRoom(String meetingRoom) {
+    public void setMeetingRoom(Integer meetingRoom) {
         this.meetingRoom = meetingRoom;
     }
+
+
+    @Override
+    public int compareTo(Meeting o) {
+        return getDateBegin().compareTo(o.getDateBegin());
+    }
+
+
 }
