@@ -51,7 +51,7 @@ public class MeetingListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
-        date = menu.findItem(R.id.selection_date);
+        date = menu.findItem(R.id.date_selectionnée);
 
         return true;
     }
@@ -63,27 +63,20 @@ public class MeetingListActivity extends AppCompatActivity {
             case R.id.filtre_date_croissante:
                 mApiService.getMeetingsByOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
-                date.setTitle("Sélectionner une date");
+                date.setTitle("");
 
                 return true;
 
             case R.id.filtre_date_décroissante:
                 mApiService.getMeetingsByReverseOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
-                date.setTitle("Sélectionner une date");
+                date.setTitle("");
 
                 return true;
 
-            case R.id.filtre_salle:
-                mApiService.getMeetingsByRoom();
-                mMeetingListAdapter.notifyDataSetChanged();
-                date.setTitle("Sélectionner une date");
-                return true;
-
-            case R.id.selection_date:
-
+            case R.id.date_selectionnée:
                 // calender class's instance and get current date , month and year from calender
-                final Calendar c = Calendar.getInstance();
+                Calendar c = Calendar.getInstance();
                 int mYear = c.get(Calendar.YEAR); // current year
                 int mMonth = c.get(Calendar.MONTH); // current month
                 int mDay = c.get(Calendar.DAY_OF_MONTH); // current day
@@ -108,7 +101,47 @@ public class MeetingListActivity extends AppCompatActivity {
                 Log.d("", String.valueOf(TimeChoose));
 
 
-                
+
+                datePickerDialog.show();
+
+                return true;
+
+
+            case R.id.filtre_salle:
+                mApiService.getMeetingsByRoom();
+                mMeetingListAdapter.notifyDataSetChanged();
+                date.setTitle("");
+                return true;
+
+            case R.id.selection_date:
+
+                // calender class's instance and get current date , month and year from calender
+                c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR); // current year
+                mMonth = c.get(Calendar.MONTH); // current month
+                mDay = c.get(Calendar.DAY_OF_MONTH); // current day
+                // date picker dialog
+                // set day of month , month and year value in the edit text
+                datePickerDialog = new DatePickerDialog(MeetingListActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                // set day of month , month and year value in the edit text
+                                date.setTitle(dayOfMonth + "/"
+                                        + (monthOfYear + 1) + "/" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+
+
+                TimeChoose = new DateTime(mYear, mMonth, mDay, 00, 00);
+                Log.d("", String.valueOf(TimeChoose));
+
+
+
                 datePickerDialog.show();
 
                 return true;

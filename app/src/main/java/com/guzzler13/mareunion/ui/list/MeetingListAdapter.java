@@ -1,5 +1,6 @@
 package com.guzzler13.mareunion.ui.list;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
@@ -38,16 +42,23 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
 
         final Meeting meeting = mMeetings.get(position);
-        holder.mRoom.setText(String.format("Salle %s", String.valueOf(meeting.getMeetingRoom())));
+
+        if (position % 2 == 0) {
+            holder.constraintLayout.setBackgroundColor(Color.parseColor("#DCDCDC"));
+        }
+        holder.mRoom.setText(meeting.getMeetingRoom().getmNameRoom());
         holder.mTime.setText(meeting.getDateBegin().toString("dd/MM kk:mm"));
         holder.mNameMeeting.setText(meeting.getName());
         holder.mParticipants.setText(meeting.getParticipants());
-        holder.mImageView.setImageResource(R.drawable.ic_brightness_1_red_200_24dp);
 
+        Glide.with(holder.mImageView.getContext())
+                .load(meeting.getMeetingRoom().getmRoomColor())
+                .apply(RequestOptions.circleCropTransform())
+                .into(holder.mImageView);
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
 
@@ -67,6 +78,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        ConstraintLayout constraintLayout;
         ImageButton mDeleteButton;
         ImageView mImageView;
         TextView mParticipants;
@@ -77,7 +89,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
         ViewHolder(View view) {
             super(view);
-
+            constraintLayout = itemView.findViewById(R.id.constraint_layout);
             mImageView = view.findViewById(R.id.imageView);
             mDeleteButton = view.findViewById(R.id.meeting_delete_button_meeting_list);
             mImageView = view.findViewById(R.id.imageView);

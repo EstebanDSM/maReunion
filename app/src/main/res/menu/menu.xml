@@ -6,10 +6,17 @@
     <group android:checkableBehavior="single">
 
         <item
+            android:id="@+id/date_selectionnée"
+            android:checkable="false"
+            android:title=""
+            app:showAsAction="always"
+            />
+
+        <item
             android:id="@+id/selection_date"
             android:checkable="false"
             android:title="Sélectionner une date "
-            app:showAsAction="always" />
+             />
 
 
         <item

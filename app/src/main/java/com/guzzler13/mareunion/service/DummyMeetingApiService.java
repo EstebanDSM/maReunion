@@ -1,6 +1,7 @@
 package com.guzzler13.mareunion.service;
 
 import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.model.Room;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -12,6 +13,8 @@ import java.util.List;
 public class DummyMeetingApiService implements MeetingApiService {
 
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
+
+    private List<Room> mRooms = RoomGenerator.generateRooms();
 
 
     /**
@@ -60,7 +63,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     public List<Meeting> getMeetingsByRoom() {
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
-                return o1.getMeetingRoom() - (o2.getMeetingRoom());
+                return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
             }
         });
         return mMeetings;
@@ -77,12 +80,19 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
 
+
+
     /**
      * {@inheritDoc}
      */
     @Override
     public void addMeeting(Meeting meeting) {
         mMeetings.add(meeting);
+    }
+
+    @Override
+    public List<Room> getRooms() {
+        return mRooms;
     }
 
 

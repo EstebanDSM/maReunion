@@ -9,27 +9,19 @@ public class Meeting {
     private DateTime dateBegin;
     private DateTime dateEnd;
     private String participants;
-    private Integer meetingRoom;
-    private Boolean isReserved;
+    private Room meetingRoom;
 
 
-    public Meeting(Integer id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Integer meetingRoom) {
+    public Meeting(Integer id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom) {
         this.id = id;
         this.name = name;
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.participants = participants;
         this.meetingRoom = meetingRoom;
-        this.isReserved = false;
+
     }
 
-    public Boolean getReserved() {
-        return isReserved;
-    }
-
-    public void setReserved(Boolean reserved) {
-        isReserved = reserved;
-    }
 
     public Integer getId() {
         return id;
@@ -71,11 +63,11 @@ public class Meeting {
         this.participants = participants;
     }
 
-    public int getMeetingRoom() {
+    public Room getMeetingRoom() {
         return meetingRoom;
     }
 
-    public void setMeetingRoom(Integer meetingRoom) {
+    public void setMeetingRoom(Room meetingRoom) {
         this.meetingRoom = meetingRoom;
     }
 

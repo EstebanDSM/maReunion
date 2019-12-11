@@ -1,6 +1,7 @@
 package com.guzzler13.mareunion.service;
 
 import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.model.Room;
 
 import java.util.List;
 
@@ -54,6 +55,9 @@ public interface MeetingApiService {
      * @param meeting
      */
     void addMeeting(Meeting meeting);
+
+
+    List<Room> getRooms ();
 
 
 }
