@@ -18,10 +18,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeetingsOrder() {
-
-        Collections.sort(mMeetings);
-
+    public List<Meeting> getMeetings() {
         return mMeetings;
     }
 
@@ -30,22 +27,35 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeetingsReverseOrder() {
+    public List<Meeting> getMeetingsByOrderDate() {
 
-        Collections.sort(mMeetings, Collections.<Meeting>reverseOrder());
-
+        Collections.sort(mMeetings, new Comparator<Meeting>() {
+            public int compare(Meeting o1, Meeting o2) {
+                return o1.getDateBegin().compareTo(o2.getDateBegin());
+            }
+        });
         return mMeetings;
     }
+
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public void deleteMeeting(Meeting meeting) {
-        mMeetings.remove(meeting);
+    public List<Meeting> getMeetingsByReverseOrderDate() {
 
+        Collections.sort(mMeetings, new Comparator<Meeting>() {
+            public int compare(Meeting o1, Meeting o2) {
+                return o2.getDateBegin().compareTo(o1.getDateBegin());
+            }
+        });
+        return mMeetings;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Meeting> getMeetingsByRoom() {
         Collections.sort(mMeetings, new Comparator<Meeting>() {
@@ -56,6 +66,20 @@ public class DummyMeetingApiService implements MeetingApiService {
         return mMeetings;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        mMeetings.remove(meeting);
+
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void addMeeting(Meeting meeting) {
         mMeetings.add(meeting);

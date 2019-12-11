@@ -11,12 +11,14 @@ import java.util.List;
 public interface MeetingApiService {
 
 
+    List<Meeting> getMeetings();
+
     /**
      * Get all Meetings in order of date
      *
      * @return {@link List}
      */
-    List<Meeting> getMeetingsOrder();
+    List<Meeting> getMeetingsByOrderDate();
 
 
     /**
@@ -24,7 +26,7 @@ public interface MeetingApiService {
      *
      * @return {@link List}
      */
-    List<Meeting> getMeetingsReverseOrder();
+    List<Meeting> getMeetingsByReverseOrderDate();
 
 
 

@@ -2,7 +2,7 @@ package com.guzzler13.mareunion.model;
 
 import org.joda.time.DateTime;
 
-public class Meeting implements Comparable<Meeting>{
+public class Meeting {
 
     private Integer id;
     private String name;
@@ -78,12 +78,5 @@ public class Meeting implements Comparable<Meeting>{
     public void setMeetingRoom(Integer meetingRoom) {
         this.meetingRoom = meetingRoom;
     }
-
-
-    @Override
-    public int compareTo(Meeting o) {
-        return getDateBegin().compareTo(o.getDateBegin());
-    }
-
 
 }

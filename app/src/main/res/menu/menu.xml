@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/selection_date"
+            android:checkable="false"
+            android:title="Sélectionner une date "
+            app:showAsAction="always" />
+
+
+        <item
+            android:id="@+id/filtre_date_croissante"
+            android:checkable="false"
+            android:title="Filtrer par date croissante"
+
+            />
+
+
+        <item
+            android:id="@+id/filtre_date_décroissante"
+            android:checkable="false"
+            android:title="Filtrer par date décroissante"
+
+            />
+
+        <item
+            android:id="@+id/filtre_salle"
+            android:checkable="false"
+            android:title="Filtrer par salle " />
+
+
+    </group>
+
+
+</menu>

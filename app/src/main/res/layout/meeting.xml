@@ -40,7 +40,7 @@
         android:maxLines="1"
         android:text="Marty.McFly@gmail.com"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textSize="12sp"
+        android:textSize="10sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/meeting_delete_button_meeting_list"
