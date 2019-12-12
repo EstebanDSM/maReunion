@@ -1,11 +1,13 @@
 package com.guzzler13.mareunion.ui.list;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.DatePicker;
 
 import androidx.annotation.NonNull;
@@ -13,10 +15,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.service.MeetingApiService;
+import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
 import org.joda.time.DateTime;
 
@@ -42,6 +46,21 @@ public class MeetingListActivity extends AppCompatActivity {
         mMeetingListAdapter = new MeetingListAdapter(mMeetings);
         mRecyclerView.setAdapter(mMeetingListAdapter);
         mMeetingListAdapter.notifyDataSetChanged();
+
+
+        FloatingActionButton btnFab = findViewById(R.id.btnFab);
+        btnFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Log.d("DEBUG", "onClick:  Open Activity");
+
+                Intent intent = new Intent(MeetingListActivity.this , DetailsMeetingActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
 
 
     }
@@ -97,8 +116,8 @@ public class MeetingListActivity extends AppCompatActivity {
                         }, mYear, mMonth, mDay);
 
 
-                DateTime TimeChoose = new DateTime(mYear, mMonth, mDay, 00, 00);
-                Log.d("", String.valueOf(TimeChoose));
+                DateTime mTime = new DateTime(mYear, mMonth, mDay, 00, 00);
+                Log.d("", String.valueOf(mTime));
 
 
 
@@ -137,9 +156,8 @@ public class MeetingListActivity extends AppCompatActivity {
                         }, mYear, mMonth, mDay);
 
 
-                TimeChoose = new DateTime(mYear, mMonth, mDay, 00, 00);
-                Log.d("", String.valueOf(TimeChoose));
-
+                mTime = new DateTime(mYear, mMonth, mDay, 00, 00);
+                Log.d("", String.valueOf(mTime));
 
 
                 datePickerDialog.show();

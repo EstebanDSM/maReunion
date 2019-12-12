@@ -35,7 +35,6 @@ abstract class DummyMeetingGenerator {
             new Meeting(4, "Réunion E", dateTimeMeeting4, dateTimeEndMeeting4,
                     "skywalker@starwars.es", RoomGenerator.generateRooms().get(4))
 
-
             );
 
 

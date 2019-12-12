@@ -1,5 +1,6 @@
 package com.guzzler13.mareunion.ui.list;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.service.MeetingApiService;
+import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
 import java.util.List;
 
@@ -70,6 +72,16 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 notifyDataSetChanged();
             }
         });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), DetailsMeetingActivity.class);
+                intent.putExtra("id", mMeetings.indexOf(meeting));
+
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override
