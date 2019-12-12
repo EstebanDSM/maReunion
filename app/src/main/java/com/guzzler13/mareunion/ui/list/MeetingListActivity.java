@@ -112,15 +112,15 @@ public class MeetingListActivity extends AppCompatActivity {
                                 }
                                 date.setTitle(d + "/"
                                         + m + "/" + year);
-                                DateTime temp = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
+                                DateTime time = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
 
                                 mMeetings.clear();
-                                mMeetings.addAll(mApiService.getMeetingsByDate(temp));
+                                mMeetings.addAll(mApiService.getMeetingsByDate(time));
                                 mMeetingListAdapter.notifyDataSetChanged();
                             }
                         }, mYear, mMonth, mDay);
 
-                if (date.getTitle() != "Tri par salle" && date.getTitle() != "Tri par date décroissante" && date.getTitle() != "Tri par date croissante" && date.getTitle() != "") {
+                if (date.getTitle() != "Tri par salle" && date.getTitle() != "Tri par date décroissante" && date.getTitle() != "Tri par date croissante") {
                     datePickerDialog.show();
                 }
                 return true;
