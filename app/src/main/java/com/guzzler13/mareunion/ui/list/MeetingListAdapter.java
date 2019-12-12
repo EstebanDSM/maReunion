@@ -43,14 +43,20 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
 
         final Meeting meeting = mMeetings.get(position);
 
+        mMeetings = mApiService.getMeetings();
+
+
         if (position % 2 == 0) {
             holder.constraintLayout.setBackgroundColor(Color.parseColor("#DCDCDC"));
+        } else {
+            holder.constraintLayout.setBackgroundColor(Color.parseColor("#EFEFEF"));
         }
         holder.mRoom.setText(meeting.getMeetingRoom().getmNameRoom());
         holder.mTime.setText(meeting.getDateBegin().toString("dd/MM kk:mm"));
@@ -62,16 +68,19 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mImageView);
 
-        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
 
+        holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mApiService.deleteMeeting(meeting);
+                notifyDataSetChanged();
+
                 int sizeList = mMeetings.size();
                 Log.e("size", Integer.toString(sizeList));
-                notifyDataSetChanged();
             }
         });
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,15 +88,18 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 intent.putExtra("id", mMeetings.indexOf(meeting));
 
                 holder.itemView.getContext().startActivity(intent);
+
+                Log.e("", "Nom de la Réunion : " + meeting.getName());
+                Log.e("", "ID : " + meeting.getId().toString());
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
         return mMeetings.size();
     }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout constraintLayout;

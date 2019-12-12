@@ -21,6 +21,8 @@ abstract class DummyMeetingGenerator {
     private static final DateTime dateTimeEndMeeting3 = new DateTime(2019, 12, 26, 15, 45);
     private static final DateTime dateTimeMeeting4 = new DateTime(2019, 12, 27, 14, 30);
     private static final DateTime dateTimeEndMeeting4 = new DateTime(2019, 12, 27, 15, 30);
+    private static final DateTime dateTimeMeeting5 = new DateTime(2019, 12, 27, 15, 30);
+    private static final DateTime dateTimeEndMeeting5 = new DateTime(2019, 12, 27, 16, 30);
 
 
     private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
@@ -33,9 +35,11 @@ abstract class DummyMeetingGenerator {
             new Meeting(3, "Réunion D", dateTimeMeeting3, dateTimeEndMeeting3,
                     "sarah.connor@inyourface.com", RoomGenerator.generateRooms().get(3)),
             new Meeting(4, "Réunion E", dateTimeMeeting4, dateTimeEndMeeting4,
-                    "skywalker@starwars.es", RoomGenerator.generateRooms().get(4))
+                    "skywalker@starwars.es", RoomGenerator.generateRooms().get(4)),
+            new Meeting(5, "Réunion F", dateTimeMeeting5, dateTimeEndMeeting5,
+                    "McFly@bttf.com", RoomGenerator.generateRooms().get(2))
 
-            );
+    );
 
 
     static List<Meeting> generateMeetings() {

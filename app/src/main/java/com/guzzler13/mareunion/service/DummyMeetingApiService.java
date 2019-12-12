@@ -1,5 +1,7 @@
 package com.guzzler13.mareunion.service;
 
+import android.util.Log;
+
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.model.Room;
 
@@ -9,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
 
 /**
  * Dummy mock for the Api
@@ -44,8 +47,6 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
 
-
-
     /**
      * {@inheritDoc}
      */
@@ -67,7 +68,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public List<Meeting> getMeetingsByRoom() {
         Collections.sort(mMeetings, new Comparator<Meeting>() {
-            public int compare(Meeting o1, Meeting o2) {
+            public int compare(Meeting o2, Meeting o1) {
                 return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
             }
         });
@@ -83,8 +84,6 @@ public class DummyMeetingApiService implements MeetingApiService {
         mMeetings.remove(meeting);
 
     }
-
-
 
 
     /**
@@ -105,11 +104,12 @@ public class DummyMeetingApiService implements MeetingApiService {
         List<Meeting> res = new ArrayList<>();
 
         for (Meeting m : mMeetings) {
-            if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())){
+            if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
+                Log.e("", String.valueOf(m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())));
                 res.add(m);
             }
         }
-
+        Log.e("", res.toString());
         return res;
     }
 
