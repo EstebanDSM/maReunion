@@ -3,6 +3,8 @@ package com.guzzler13.mareunion.service;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.model.Room;
 
+import org.joda.time.DateTime;
+
 import java.util.List;
 
 
@@ -58,6 +60,10 @@ public interface MeetingApiService {
 
 
     List<Room> getRooms ();
+
+
+
+    List<Meeting> getMeetingsByDate(DateTime mDate);
 
 
 }

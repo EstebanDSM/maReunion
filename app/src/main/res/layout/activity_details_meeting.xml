@@ -194,11 +194,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:inputType="text"
                 android:id="@+id/meetingName_editText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
-                tools:ignore="LabelFor" />
+                tools:ignore="LabelFor"
+                 />
         </com.google.android.material.textfield.TextInputLayout>
 
 

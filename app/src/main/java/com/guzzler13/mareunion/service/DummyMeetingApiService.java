@@ -3,6 +3,9 @@ package com.guzzler13.mareunion.service;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.model.Room;
 
+import org.joda.time.DateTime;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -39,6 +42,8 @@ public class DummyMeetingApiService implements MeetingApiService {
         });
         return mMeetings;
     }
+
+
 
 
     /**
@@ -93,6 +98,19 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public List<Room> getRooms() {
         return mRooms;
+    }
+
+    @Override
+    public List<Meeting> getMeetingsByDate(DateTime mDate) {
+        List<Meeting> res = new ArrayList<>();
+
+        for (Meeting m : mMeetings) {
+            if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())){
+                res.add(m);
+            }
+        }
+
+        return res;
     }
 
 
