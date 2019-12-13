@@ -147,10 +147,10 @@ public class MeetingListActivity extends AppCompatActivity {
                                 date.setTitle(d + "/"
                                         + m + "/" + year);
                                 DateTime time = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
+
                                 mMeetings.clear();
                                 mMeetings.addAll(mApiService.getMeetingsByDate(time));
                                 Log.e("", mMeetings.toString());
-
                                 mMeetingListAdapter.notifyDataSetChanged();
                             }
                         }, mYear, mMonth, mDay);
@@ -168,6 +168,11 @@ public class MeetingListActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void initList() {
+mMeetings = mApiService.getMeetings();
+mMeetingListAdapter.notifyDataSetChanged();
     }
 }
 
