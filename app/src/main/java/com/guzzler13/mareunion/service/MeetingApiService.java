@@ -32,14 +32,12 @@ public interface MeetingApiService {
     List<Meeting> getMeetingsByReverseOrderDate();
 
 
-
     /**
      * Deletes a meeting
      *
      * @param meeting
      */
     void deleteMeeting(Meeting meeting);
-
 
 
     /**
@@ -49,6 +47,13 @@ public interface MeetingApiService {
      */
     List<Meeting> getMeetingsByRoom();
 
+
+    /**
+     * Get all Meetings in order of Rooms
+     *
+     * @return {@link List}
+     */
+    List<Meeting> getMeetingsFilterRoom(String salle);
 
 
     /**
@@ -60,7 +65,6 @@ public interface MeetingApiService {
 
 
     List<Room> getRooms ();
-
 
 
     List<Meeting> getMeetingsByDate(DateTime mDate);

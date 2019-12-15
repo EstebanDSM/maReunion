@@ -29,7 +29,7 @@ abstract class DummyMeetingGenerator {
             new Meeting(0, "Réunion A", dateTimeMeeting0, dateTimeEndMeeting0,
                     "McFly@bttf.com", RoomGenerator.generateRooms().get(0)),
             new Meeting(1, "Réunion B", dateTimeMeeting1, dateTimeEndMeeting1,
-                    "lucas@boulik.com, dark.vador@starwars.com, toto@smiley.com", RoomGenerator.generateRooms().get(1)),
+                    "lucas@boulik.com, dark.vador@starwars.com, toto@smiley.com, abc123@jacksonFive.com", RoomGenerator.generateRooms().get(1)),
             new Meeting(2, "Réunion C", dateTimeMeeting2, dateTimeEndMeeting2,
                     "doc@bttf.com", RoomGenerator.generateRooms().get(2)),
             new Meeting(3, "Réunion D", dateTimeMeeting3, dateTimeEndMeeting3,

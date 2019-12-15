@@ -1,7 +1,5 @@
 package com.guzzler13.mareunion.service;
 
-import android.util.Log;
-
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.model.Room;
 
@@ -19,7 +17,6 @@ import java.util.List;
 public class DummyMeetingApiService implements MeetingApiService {
 
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
-
     private List<Room> mRooms = RoomGenerator.generateRooms();
 
 
@@ -52,7 +49,6 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public List<Meeting> getMeetingsByReverseOrderDate() {
-
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o2.getDateBegin().compareTo(o1.getDateBegin());
@@ -75,6 +71,18 @@ public class DummyMeetingApiService implements MeetingApiService {
         return mMeetings;
     }
 
+    @Override
+    public List<Meeting> getMeetingsFilterRoom(String salle) {
+        List<Meeting> res = new ArrayList<>();
+
+        for (Meeting m : mMeetings) {
+            if (m.getMeetingRoom().getmNameRoom().equals(salle)) {
+                res.add(m);
+            }
+        }
+        return res;
+    }
+
 
     /**
      * {@inheritDoc}
@@ -82,7 +90,6 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public void deleteMeeting(Meeting meeting) {
         mMeetings.remove(meeting);
-
     }
 
 
@@ -94,10 +101,12 @@ public class DummyMeetingApiService implements MeetingApiService {
         mMeetings.add(meeting);
     }
 
+
     @Override
     public List<Room> getRooms() {
         return mRooms;
     }
+
 
     @Override
     public List<Meeting> getMeetingsByDate(DateTime mDate) {
@@ -105,13 +114,9 @@ public class DummyMeetingApiService implements MeetingApiService {
 
         for (Meeting m : mMeetings) {
             if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
-                Log.e("", String.valueOf(m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())));
                 res.add(m);
             }
         }
-        Log.e("", res.toString());
         return res;
     }
-
-
 }
