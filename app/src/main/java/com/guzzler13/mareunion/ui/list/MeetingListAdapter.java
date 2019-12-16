@@ -28,15 +28,17 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     private List<Meeting> mMeetings;
     private MeetingApiService mApiService = DI.getMeetingApiService();
+    private Meeting meeting;
 
 
     MeetingListAdapter(List<Meeting> items) {
         mMeetings = items;
     }
 
+
     @NonNull
     @Override
-    public MeetingListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MeetingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.meeting, parent, false);
 
@@ -47,10 +49,11 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-
-        final Meeting meeting = mMeetings.get(position);
-
+        meeting = mMeetings.get(position);
         mMeetings = mApiService.getMeetings();
+
+
+
 
 
         if (position % 2 == 0) {
@@ -67,6 +70,8 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 .load(meeting.getMeetingRoom().getmRoomColor())
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.mImageView);
+
+
 
 
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {

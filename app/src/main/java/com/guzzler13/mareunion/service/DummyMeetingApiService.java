@@ -115,6 +115,7 @@ public class DummyMeetingApiService implements MeetingApiService {
         for (Meeting m : mMeetings) {
             if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
                 res.add(m);
+
             }
         }
         return res;
