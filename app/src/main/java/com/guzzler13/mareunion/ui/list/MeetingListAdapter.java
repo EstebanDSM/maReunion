@@ -28,7 +28,6 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     private List<Meeting> mMeetings;
     private MeetingApiService mApiService = DI.getMeetingApiService();
-    private Meeting meeting;
 
 
     MeetingListAdapter(List<Meeting> items) {
@@ -49,7 +48,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        meeting = mMeetings.get(position);
+        final Meeting meeting = mMeetings.get(position);
         mMeetings = mApiService.getMeetings();
 
 

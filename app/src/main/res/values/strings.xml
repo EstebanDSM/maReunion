@@ -20,14 +20,14 @@
     <string name="error_message_meeting_room">La salle de réunion est déjà réservée aux heures indiquées, veuillez faire les modifications nécessaires</string>
     <string name="error_message_time">L\'heure de fin de réunion est avant l\'heure de début</string>
     <string name="error_message_date_and_time">Veuillez remplir les champs date et heures</string>
-    <string name="room01">Salle 1</string>
-    <string name="room02">Salle 2</string>
-    <string name="room03">Salle 3</string>
-    <string name="room04">Salle 4</string>
-    <string name="room05">Salle 5</string>
-    <string name="room06">Salle 6</string>
-    <string name="room07">Salle 7</string>
-    <string name="room08">Salle 8</string>
-    <string name="room09">Salle 9</string>
-    <string name="room10">Salle 10</string>
+    <string name="room01">Peach</string>
+    <string name="room02">Mario</string>
+    <string name="room03">Luigi</string>
+    <string name="room04">Toad</string>
+    <string name="room05">Bowser</string>
+    <string name="room06">Yoshi</string>
+    <string name="room07">Mario</string>
+    <string name="room08">Daisy</string>
+    <string name="room09">Harmonie</string>
+    <string name="room10">Pokey</string>
 </resources>

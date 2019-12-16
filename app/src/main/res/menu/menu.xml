@@ -4,11 +4,6 @@
 
     <group android:checkableBehavior="single">
 
-        <!--        <item-->
-        <!--            android:id="@+id/date_visible_toolbar"-->
-        <!--            android:checkable="false"-->
-        <!--            android:title="Sélectionner date"-->
-        <!--            app:showAsAction="always"/>-->
 
         <item
             android:id="@+id/selection_date"

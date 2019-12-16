@@ -149,10 +149,12 @@ public class MeetingListActivity extends AppCompatActivity {
 
                 DateTime time = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
 
-                mMeetings.clear();
-                mMeetings.addAll(mApiService.getMeetingsByDate(time));
                 mMeetingListAdapter = new MeetingListAdapter(mMeetings);
                 mRecyclerView.setAdapter(mMeetingListAdapter);
+
+                mMeetings.clear();
+                mMeetings.addAll(mApiService.getMeetingsByDate(time));
+
                 mMeetingListAdapter.notifyDataSetChanged();
 
 
