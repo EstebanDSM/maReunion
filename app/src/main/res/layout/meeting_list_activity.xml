@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
 
     tools:context=".ui.list.MeetingListActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
 
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/list_meetings"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         android:scrollbars="vertical"
 
 
-        tools:listitem="@layout/meeting"/>
+        tools:listitem="@layout/meeting" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnFab"
-        android:layout_width="55dp"
-        android:layout_height="55dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="24dp"
-        android:background="@android:color/holo_red_dark"
-        android:src="@drawable/ic_add"
+        android:clickable="true"
+        android:focusable="true"
+        app:backgroundTint="#ED4646"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:srcCompat="@drawable/ic_add_white_48dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
