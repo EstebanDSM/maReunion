@@ -49,11 +49,6 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
         final Meeting meeting = mMeetings.get(position);
-        mMeetings = mApiService.getMeetings();
-
-
-
-
 
         if (position % 2 == 0) {
             holder.constraintLayout.setBackgroundColor(Color.parseColor("#DCDCDC"));
