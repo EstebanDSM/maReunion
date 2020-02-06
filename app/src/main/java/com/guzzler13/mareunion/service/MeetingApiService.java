@@ -19,17 +19,15 @@ public interface MeetingApiService {
     /**
      * Get all Meetings in order of date
      *
-     * @return {@link List}
      */
-    List<Meeting> getMeetingsByOrderDate();
+    void getMeetingsByOrderDate();
 
 
     /**
      * Get all Meetings in Reverse order of date
      *
-     * @return {@link List}
      */
-    List<Meeting> getMeetingsByReverseOrderDate();
+    void getMeetingsByReverseOrderDate();
 
 
     /**
@@ -43,17 +41,15 @@ public interface MeetingApiService {
     /**
      * Get all Meetings in order of Rooms
      *
-     * @return {@link List}
      */
-    List<Meeting> getMeetingsByRoom();
+    void getMeetingsByRoom();
 
 
     /**
      * Get all Meetings in order of Rooms
      *
-     * @return {@link List}
      */
-    List<Meeting> getMeetingsFilterRoom(String salle);
+    void getMeetingsFilterRoom(String salle);
 
 
     /**

@@ -11,18 +11,18 @@ import java.util.List;
 
 abstract class DummyMeetingGenerator {
 
-    private static final DateTime dateTimeMeeting0 = new DateTime(2019, 12, 25, 10, 0);
-    private static final DateTime dateTimeEndMeeting0 = new DateTime(2019, 12, 25, 10, 45);
-    private static final DateTime dateTimeMeeting1 = new DateTime(2019, 12, 26, 18, 0);
-    private static final DateTime dateTimeEndMeeting1 = new DateTime(2019, 12, 26, 19, 0);
-    private static final DateTime dateTimeMeeting2 = new DateTime(2019, 12, 24, 9, 0);
-    private static final DateTime dateTimeEndMeeting2 = new DateTime(2019, 12, 24, 9, 30);
-    private static final DateTime dateTimeMeeting3 = new DateTime(2019, 12, 26, 15, 0);
-    private static final DateTime dateTimeEndMeeting3 = new DateTime(2019, 12, 26, 15, 45);
-    private static final DateTime dateTimeMeeting4 = new DateTime(2019, 12, 27, 14, 30);
-    private static final DateTime dateTimeEndMeeting4 = new DateTime(2019, 12, 27, 15, 30);
-    private static final DateTime dateTimeMeeting5 = new DateTime(2019, 12, 27, 15, 30);
-    private static final DateTime dateTimeEndMeeting5 = new DateTime(2019, 12, 27, 16, 30);
+    private static final DateTime dateTimeMeeting0 = new DateTime(2020, 2, 25, 10, 0);
+    private static final DateTime dateTimeEndMeeting0 = new DateTime(2012, 2, 25, 10, 45);
+    private static final DateTime dateTimeMeeting1 = new DateTime(2020, 2, 26, 18, 0);
+    private static final DateTime dateTimeEndMeeting1 = new DateTime(2020, 2, 26, 19, 0);
+    private static final DateTime dateTimeMeeting2 = new DateTime(2020, 2, 24, 9, 0);
+    private static final DateTime dateTimeEndMeeting2 = new DateTime(2020, 2, 24, 9, 30);
+    private static final DateTime dateTimeMeeting3 = new DateTime(2020, 2, 26, 15, 0);
+    private static final DateTime dateTimeEndMeeting3 = new DateTime(2020, 2, 26, 15, 45);
+    private static final DateTime dateTimeMeeting4 = new DateTime(2020, 2, 27, 14, 30);
+    private static final DateTime dateTimeEndMeeting4 = new DateTime(2020, 2, 27, 15, 30);
+    private static final DateTime dateTimeMeeting5 = new DateTime(2020, 2, 27, 15, 30);
+    private static final DateTime dateTimeEndMeeting5 = new DateTime(2020, 2, 27, 16, 30);
 
 
     private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(

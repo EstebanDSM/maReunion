@@ -33,14 +33,14 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeetingsByOrderDate() {
+    public void getMeetingsByOrderDate() {
 
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o1.getDateBegin().compareTo(o2.getDateBegin());
             }
         });
-        return mMeetings;
+
     }
 
 
@@ -48,13 +48,13 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeetingsByReverseOrderDate() {
+    public void getMeetingsByReverseOrderDate() {
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o2.getDateBegin().compareTo(o1.getDateBegin());
             }
         });
-        return mMeetings;
+
     }
 
 
@@ -62,17 +62,17 @@ public class DummyMeetingApiService implements MeetingApiService {
      * {@inheritDoc}
      */
     @Override
-    public List<Meeting> getMeetingsByRoom() {
+    public void getMeetingsByRoom() {
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o2, Meeting o1) {
                 return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
             }
         });
-        return mMeetings;
+
     }
 
     @Override
-    public List<Meeting> getMeetingsFilterRoom(String salle) {
+    public void getMeetingsFilterRoom(String salle) {
         List<Meeting> res = new ArrayList<>();
 
         for (Meeting m : mMeetings) {
@@ -80,7 +80,8 @@ public class DummyMeetingApiService implements MeetingApiService {
                 res.add(m);
             }
         }
-        return res;
+        mMeetings.clear();
+        mMeetings.addAll(res);
     }
 
 

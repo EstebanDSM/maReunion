@@ -1,8 +1,11 @@
 package com.guzzler13.mareunion.ui.details;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -10,13 +13,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -25,8 +31,12 @@ import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.service.MeetingApiService;
 
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class DetailsMeetingActivity extends AppCompatActivity {
 
@@ -39,7 +49,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
     private TextView mEndTimeEdit;
     private AutoCompleteTextView mParticipantsAutoCompleteTextView;
     private ChipGroup mParticipantsChipGroup;
-
+    private Button mButtonSave;
+    private Button addParticipantButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +64,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         mEndTimeEdit = findViewById(R.id.endTimeEdit_TextView);
         mParticipantsAutoCompleteTextView = findViewById(R.id.participant_autoCompleteTextView);
         mParticipantsChipGroup = findViewById(R.id.chipGroup);
-        Button addParticipantButton = findViewById(R.id.addParticipant_button);
+        addParticipantButton = findViewById(R.id.addParticipant_button);
+        mButtonSave = findViewById(R.id.saveMetting_button);
 
 
         //Spinner to choose meeting room :
@@ -93,9 +105,12 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
 
 
-
             }
         });
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //AutocompleteTextView + chips to add the participants :
         ArrayAdapter<CharSequence> adapterParticipants = ArrayAdapter.createFromResource(this,
@@ -169,12 +184,57 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             }
 
 
-
-
-
         } else {
-            // click à partir du FLOAT (création ou modif meeting)
-            mMeetingName.setText("click a partir du Float");
+//             click à partir du FLOAT (création ou modif meeting)
+
+//            mButtonSave.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//
+//
+//                    Meeting meeting = new Meeting(
+//                            25,
+//                            mMeetingName.getText().toString(),
+//                            new DateTime(mBeginTimeEdit.getText().)
+//
+//
+//
+//
+//                            );
+//
+//
+//                    mApiService.addMeeting(meeting);
+//                }
+//            });
+
+            mDateEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    dateHandle();
+
+                }
+            });
+
+            mBeginTimeEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    BegintimeHandle();
+                }
+            });
+
+            mEndTimeEdit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    EndtimeHandle();
+                }
+            });
+
+
+
 
 
         }
@@ -190,5 +250,114 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         chip.setCloseIconVisible(true);
         return chip;
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    public void BegintimeHandle(){
+
+        final Calendar calendar1 = Calendar.getInstance();
+
+        int HOUR = calendar1.get(Calendar.HOUR_OF_DAY);
+        int MINUTE = calendar1.get(Calendar.MINUTE);
+
+        boolean is24hourFormat = DateFormat.is24HourFormat(this);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+                String timeString = hour +" "+ minute;
+                mBeginTimeEdit.setText(timeString);
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.HOUR,hour);
+                calendar1.set(Calendar.MINUTE,minute);
+
+                CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
+
+                mBeginTimeEdit.setText(timeTexte);
+
+            }
+        },HOUR,MINUTE,true);
+
+        timePickerDialog.show();
+
+    }
+
+    public void EndtimeHandle(){
+
+        final Calendar calendar1 = Calendar.getInstance();
+
+        int HOUR = calendar1.get(Calendar.HOUR_OF_DAY);
+        int MINUTE = calendar1.get(Calendar.MINUTE);
+
+        boolean is24hourFormat = DateFormat.is24HourFormat(this);
+
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int hour, int minute) {
+
+                String timeString = hour +" "+ minute;
+                mEndTimeEdit.setText(timeString);
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.HOUR,hour);
+                calendar1.set(Calendar.MINUTE,minute);
+
+                CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
+
+                mEndTimeEdit.setText(timeTexte);
+
+            }
+        },HOUR,MINUTE,is24hourFormat);
+
+        timePickerDialog.show();
+
+    }
+
+    public void dateHandle() {
+
+        final Calendar calendar = Calendar.getInstance();
+
+        int YEAR = calendar.get(Calendar.YEAR);
+        int MONTH = calendar.get(Calendar.MONTH);
+        int DATE = calendar.get(Calendar.DATE);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int date) {
+
+                String dateString = year + " " + month + " " + " " + date;
+                mDateEdit.setText(dateString);
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(Calendar.YEAR, year);
+                calendar1.set(Calendar.MONTH, month);
+                calendar1.set(Calendar.DATE, date);
+
+                CharSequence dateTexte = DateFormat.format("dd/MM", calendar1);
+
+                mDateEdit.setText(dateTexte);
+            }
+        }, YEAR, MONTH, DATE);
+
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        datePickerDialog.show();
+
+    }
+
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        switch (item.getItemId()) {
+//            case android.R.id.home :
+//                Intent intent = new Intent(this, MeetingListActivity.class);
+//                startActivity(intent);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
 

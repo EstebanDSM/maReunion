@@ -18,20 +18,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
-import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.joda.time.DateTime;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 public class MeetingListActivity extends AppCompatActivity {
 
     private MeetingApiService mApiService;
-    private List<Meeting> mMeetings = new ArrayList<>();
+
     private RecyclerView.Adapter mMeetingListAdapter;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private RecyclerView mRecyclerView;
@@ -46,8 +46,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
         mRecyclerView = findViewById(R.id.list_meetings);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mMeetings.addAll(mApiService.getMeetings());
-        mMeetingListAdapter = new MeetingListAdapter(mMeetings);
+        mMeetingListAdapter = new MeetingListAdapter(mApiService.getMeetings());
         mRecyclerView.setAdapter(mMeetingListAdapter);
         mMeetingListAdapter.notifyDataSetChanged();
 
@@ -65,6 +64,26 @@ public class MeetingListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mDateSetListener = generateDatePickerDialog();
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Subscribe
+    public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
+        mApiService.deleteMeeting(deleteMeetingEvent.getMeeting());
+        mMeetingListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -78,14 +97,13 @@ public class MeetingListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filtre_date_croissante:
-                mMeetings.clear();
-                mMeetings.addAll(mApiService.getMeetingsByOrderDate());
+                mApiService.getMeetingsByOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
             case R.id.filtre_date_décroissante:
-                mMeetings.clear();
-                mMeetings.addAll(mApiService.getMeetingsByReverseOrderDate());
+
+                mApiService.getMeetingsByReverseOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
@@ -95,8 +113,8 @@ public class MeetingListActivity extends AppCompatActivity {
                 return true;
 
             case R.id.filtre_salle:
-                mMeetings.clear();
-                mMeetings.addAll(mApiService.getMeetingsByRoom());
+
+                mApiService.getMeetingsByRoom();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
@@ -153,14 +171,12 @@ public class MeetingListActivity extends AppCompatActivity {
 
                 DateTime time = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
 
-                mMeetingListAdapter = new MeetingListAdapter(mMeetings);
+                mMeetingListAdapter = new MeetingListAdapter(mApiService.getMeetings());
                 mRecyclerView.setAdapter(mMeetingListAdapter);
 
-                mMeetings.clear();
-                mMeetings.addAll(mApiService.getMeetingsByDate(time));
 
+                mApiService.getMeetingsByDate(time);
                 mMeetingListAdapter.notifyDataSetChanged();
-
 
             }
         };
@@ -178,12 +194,7 @@ public class MeetingListActivity extends AppCompatActivity {
     }
 
     private void filterItemRoom(String salle) {
-        mMeetingListAdapter = new MeetingListAdapter(mMeetings);
-        mRecyclerView.setAdapter(mMeetingListAdapter);
-
-
-        mMeetings.clear();
-        mMeetings.addAll(mApiService.getMeetingsFilterRoom(salle));
+        mApiService.getMeetingsFilterRoom(salle);
         mMeetingListAdapter.notifyDataSetChanged();
 
     }
