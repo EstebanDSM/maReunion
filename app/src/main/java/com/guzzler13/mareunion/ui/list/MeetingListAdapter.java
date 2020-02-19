@@ -69,14 +69,9 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 .into(holder.mImageView);
 
 
-
-
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mApiService.deleteMeeting(meeting);
-//                MeetingListAdapter.this.notifyDataSetChanged();
-
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
 
                 int sizeList = mMeetings.size();
@@ -92,9 +87,6 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                 intent.putExtra("id", mMeetings.indexOf(meeting));
 
                 holder.itemView.getContext().startActivity(intent);
-
-                Log.e("", "Nom de la Réunion : " + meeting.getName());
-                Log.e("", "ID : " + meeting.getId().toString());
             }
         });
     }

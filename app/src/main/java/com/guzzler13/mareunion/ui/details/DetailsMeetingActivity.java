@@ -145,6 +145,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                                 mParticipantsChipGroup.removeView(chip);
                             }
                         });
+
+
                     }
                 }
                 mParticipantsAutoCompleteTextView.setText("");
@@ -251,13 +253,25 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         }
                     }
 
+
+                    //Créer la liste des participants sous forme de String séparés par des virgules
+                    String mParticipants = "";
+                    for (int i = 0; i < mParticipantsChipGroup.getChildCount(); i++) {
+                        Chip chip = (Chip) mParticipantsChipGroup.getChildAt(i);
+                        if (mParticipantsChipGroup.getChildAt(i).getId() == 0) {
+                            mParticipants = chip.getText().toString().concat(mParticipants);
+                        } else
+                            mParticipants = chip.getText().toString().concat(", " + mParticipants);
+                    }
+
+
                     //Création nouveau meeting
                     Meeting meeting = new Meeting(
                             id,
                             mMeetingName.getText().toString(),
                             new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfWeek(), mBeginTimeEditJoda.getHourOfDay(), mBeginTimeEditJoda.getMinuteOfHour()),
                             new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfWeek(), mEndTimeEditJoda.getHourOfDay(), mEndTimeEditJoda.getMinuteOfHour()),
-                            "test@test.com",
+                            mParticipants,
                             new Room(mMeetingRoomsSpinner.getSelectedItem().toString(), color)
                     );
                     mApiService.addMeeting(meeting);
