@@ -29,14 +29,17 @@ import com.google.android.material.chip.ChipGroup;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.model.Room;
 import com.guzzler13.mareunion.service.MeetingApiService;
+import com.guzzler13.mareunion.service.RoomGenerator;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Locale;
 
 public class DetailsMeetingActivity extends AppCompatActivity {
 
@@ -69,7 +72,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
 
         //Spinner to choose meeting room :
-        ArrayList<String> meetingRooms = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.meeting_rooms_arrays)));
+        final ArrayList<String> meetingRooms = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.meeting_rooms_arrays)));
         meetingRooms.add(0, getString(R.string.choose_meetingRoom));
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, meetingRooms) {
             @Override
@@ -108,6 +111,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             }
         });
 
+        //Affichage toolbar avec flèche retour
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -159,12 +163,13 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
             String mParticipants = meeting.getParticipants();
             String nameReunion = meeting.getName();
-            String dateTime = meeting.getDateBegin().toString("dd/MM");
-            String hourBegin = meeting.getDateBegin().toString("kk:mm");
-            String hourEnd = meeting.getDateEnd().toString("kk:mm");
+            String dateTime = meeting.getDateBegin().toString("dd/MM/yyyy");
+            String hourBegin = meeting.getDateBegin().toString("HH:mm");
+            String hourEnd = meeting.getDateEnd().toString("HH:mm");
 
 
             mMeetingName.setText(nameReunion);
+
             mDateEdit.setText(dateTime);
             mDateEdit.setTextColor(getResources().getColor(R.color.colorBlack));
             mBeginTimeEdit.setText(hourBegin);
@@ -185,28 +190,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
 
         } else {
-//             click à partir du FLOAT (création ou modif meeting)
 
-//            mButtonSave.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//
-//
-//                    Meeting meeting = new Meeting(
-//                            25,
-//                            mMeetingName.getText().toString(),
-//                            new DateTime(mBeginTimeEdit.getText().)
-//
-//
-//
-//
-//                            );
-//
-//
-//                    mApiService.addMeeting(meeting);
-//                }
-//            });
+//             click à partir du FLOAT (création ou modif meeting)
 
             mDateEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -234,9 +219,50 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             });
 
 
+            mButtonSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //String vers DateTime
+                    DateTimeFormatter formatterDate = DateTimeFormat.forPattern("dd/MM/yyyy");
+                    DateTime mDateEditJoda = formatterDate.parseDateTime(mDateEdit.getText().toString());
+
+                    DateTimeFormatter formatterHour = DateTimeFormat.forPattern("HH:mm");
+                    DateTime mBeginTimeEditJoda = formatterHour.parseDateTime(mBeginTimeEdit.getText().toString());
+                    DateTime mEndTimeEditJoda = formatterHour.parseDateTime(mEndTimeEdit.getText().toString());
 
 
+                    // Donner un id à la réunion différent de ceux déjà existants :
+                    int id = 0;
+                    for (int i = 0; i < mApiService.getMeetings().size(); i++) {
+                        id++;
+                    }
 
+
+                    //Donner la bonne couleur à la réunion en fonction du nom de la salle
+                    int color = 0;
+                    String mSelected = mMeetingRoomsSpinner.getSelectedItem().toString();
+                    String mTarget;
+
+                    for (int i = 0; i < RoomGenerator.generateRooms().size(); i++) {
+                        mTarget = RoomGenerator.generateRooms().get(i).getmNameRoom();
+                        if (mSelected.equals(mTarget)) {
+                            color = RoomGenerator.generateRooms().get(i).getmRoomColor();
+                        }
+                    }
+
+                    //Création nouveau meeting
+                    Meeting meeting = new Meeting(
+                            id,
+                            mMeetingName.getText().toString(),
+                            new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfWeek(), mBeginTimeEditJoda.getHourOfDay(), mBeginTimeEditJoda.getMinuteOfHour()),
+                            new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfWeek(), mEndTimeEditJoda.getHourOfDay(), mEndTimeEditJoda.getMinuteOfHour()),
+                            "test@test.com",
+                            new Room(mMeetingRoomsSpinner.getSelectedItem().toString(), color)
+                    );
+                    mApiService.addMeeting(meeting);
+                }
+            });
         }
     }
 
@@ -257,7 +283,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         return true;
     }
 
-    public void BegintimeHandle(){
+    public void BegintimeHandle() {
 
         final Calendar calendar1 = Calendar.getInstance();
 
@@ -270,25 +296,25 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
-                String timeString = hour +" "+ minute;
+                String timeString = hour + " " + minute;
                 mBeginTimeEdit.setText(timeString);
 
                 Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(Calendar.HOUR,hour);
-                calendar1.set(Calendar.MINUTE,minute);
+                calendar1.set(Calendar.HOUR, hour);
+                calendar1.set(Calendar.MINUTE, minute);
 
                 CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
 
                 mBeginTimeEdit.setText(timeTexte);
 
             }
-        },HOUR,MINUTE,true);
+        }, HOUR, MINUTE, is24hourFormat);
 
         timePickerDialog.show();
 
     }
 
-    public void EndtimeHandle(){
+    public void EndtimeHandle() {
 
         final Calendar calendar1 = Calendar.getInstance();
 
@@ -301,19 +327,19 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
 
-                String timeString = hour +" "+ minute;
+                String timeString = hour + " " + minute;
                 mEndTimeEdit.setText(timeString);
 
                 Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(Calendar.HOUR,hour);
-                calendar1.set(Calendar.MINUTE,minute);
+                calendar1.set(Calendar.HOUR, hour);
+                calendar1.set(Calendar.MINUTE, minute);
 
                 CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
 
                 mEndTimeEdit.setText(timeTexte);
 
             }
-        },HOUR,MINUTE,is24hourFormat);
+        }, HOUR, MINUTE, is24hourFormat);
 
         timePickerDialog.show();
 
@@ -339,7 +365,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                 calendar1.set(Calendar.MONTH, month);
                 calendar1.set(Calendar.DATE, date);
 
-                CharSequence dateTexte = DateFormat.format("dd/MM", calendar1);
+                CharSequence dateTexte = DateFormat.format("dd/MM/yyyy", calendar1);
 
                 mDateEdit.setText(dateTexte);
             }

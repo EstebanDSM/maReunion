@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="meeting_rooms_arrays">
+        <item>@string/room01</item>
+        <item>@string/room02</item>
+        <item>@string/room03</item>
+        <item>@string/room04</item>
+        <item>@string/room05</item>
+        <item>@string/room06</item>
+        <item>@string/room07</item>
+        <item>@string/room08</item>
+        <item>@string/room09</item>
+        <item>@string/room10</item>
+
+    </string-array>
+
+</resources>

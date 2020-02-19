@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class RoomGenerator {
+public class RoomGenerator {
 
 
     private static List<Room> LIST_ROOM = Arrays.asList(
@@ -26,7 +26,7 @@ class RoomGenerator {
 
     );
 
-    static List<Room> generateRooms() {
+    public static List<Room> generateRooms() {
         return new ArrayList<>(LIST_ROOM);
     }
 

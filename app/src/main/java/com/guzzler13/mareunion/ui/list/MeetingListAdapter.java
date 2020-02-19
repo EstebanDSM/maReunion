@@ -59,7 +59,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             holder.constraintLayout.setBackgroundColor(Color.parseColor("#EFEFEF"));
         }
         holder.mRoom.setText(meeting.getMeetingRoom().getmNameRoom());
-        holder.mTime.setText(meeting.getDateBegin().toString("dd/MM kk:mm"));
+        holder.mTime.setText(meeting.getDateBegin().toString("dd/MM HH:mm"));
         holder.mNameMeeting.setText(meeting.getName());
         holder.mParticipants.setText(meeting.getParticipants());
 
@@ -120,7 +120,6 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             constraintLayout = itemView.findViewById(R.id.constraint_layout);
             mImageView = view.findViewById(R.id.imageView);
             mDeleteButton = view.findViewById(R.id.meeting_delete_button_meeting_list);
-            mImageView = view.findViewById(R.id.imageView);
             mParticipants = view.findViewById(R.id.participants_email_meeting_list);
             mNameMeeting = view.findViewById(R.id.meeting_name_meeting_list);
             mTime = view.findViewById(R.id.time_textView);

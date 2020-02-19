@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 public class Meeting {
 
-    private Integer id;
+    private int id;
     private String name;
     private DateTime dateBegin;
     private DateTime dateEnd;
@@ -12,7 +12,7 @@ public class Meeting {
     private Room meetingRoom;
 
 
-    public Meeting(Integer id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom) {
+    public Meeting(int id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom) {
         this.id = id;
         this.name = name;
         this.dateBegin = dateBegin;

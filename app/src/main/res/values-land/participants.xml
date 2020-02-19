@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="participants_arrays">
+        <item>McFly@bttf.com</item>
+        <item>lucas@boulik.com</item>
+        <item>dark.vador@starwars.com</item>
+        <item>toto@smiley.com</item>
+        <item>abc123@jacksonFive.com</item>
+        <item>doc@bttf.com</item>
+        <item>sarah.connor@inyourface.com</item>
+        <item>skywalker@starwars.es</item>
+        <item>Jenifer@bttf.com</item>
+    </string-array>
+</resources>

@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">Ma réunion</string>
+    <string name="by_date">Par date</string>
+    <string name="by_place">Par lieu</string>
+    <string name="save_button">Enregistrer</string>
+    <string name="date">Date :</string>
+    <string name="begin_hour">00:00</string>
+    <string name="finish_hour">00:00</string>
+    <string name="meeting_date">Exemple : 25/08/1976</string>
+    <string name="meeting_name">Nom de la réunion (Exemple : Logistique)</string>
+    <string name="meeting_room">Salle de réunion :</string>
+    <string name="participants">Participant</string>
+    <string name="add_participant">Ajouter</string>
+    <string name="begin_hour_2points">Heure de début :</string>
+    <string name="finish_hour_2points">Heure de fin :</string>
+    <string name="choose_meetingRoom">Veuillez choisir une salle</string>
+    <string name="its_not_an_email_message">Veuillez entrer un e-mail valide</string>
+    <string name="field_isEmpty">Veuillez renseigner tout les champs</string>
+    <string name="error_message">Veuillez renseigner tout les champs</string>
+    <string name="error_message_meeting_room">La salle de réunion est déjà réservée aux heures indiquées, veuillez faire les modifications nécessaires</string>
+    <string name="error_message_time">L\'heure de fin de réunion est avant l\'heure de début</string>
+    <string name="error_message_date_and_time">Veuillez remplir les champs date et heures</string>
+    <string name="room01">Peach</string>
+    <string name="room02">Mario</string>
+    <string name="room03">Luigi</string>
+    <string name="room04">Toad</string>
+    <string name="room05">Bowser</string>
+    <string name="room06">Yoshi</string>
+    <string name="room07">Mario</string>
+    <string name="room08">Daisy</string>
+    <string name="room09">Harmonie</string>
+    <string name="room10">Pokey</string>
+</resources>
