@@ -46,11 +46,11 @@ import org.joda.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class DetailsMeetingActivity extends AppCompatActivity {
 
     private MeetingApiService mApiService = DI.getMeetingApiService();
-    private Meeting meeting;
     private Spinner mMeetingRoomsSpinner;
     private TextView mMeetingName;
     private TextView mDateEdit;
@@ -58,8 +58,6 @@ public class DetailsMeetingActivity extends AppCompatActivity {
     private TextView mEndTimeEdit;
     private AutoCompleteTextView mParticipantsAutoCompleteTextView;
     private ChipGroup mParticipantsChipGroup;
-    private Button mButtonSave;
-    private Button addParticipantButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +71,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         mEndTimeEdit = findViewById(R.id.endTimeEdit_TextView);
         mParticipantsAutoCompleteTextView = findViewById(R.id.participant_autoCompleteTextView);
         mParticipantsChipGroup = findViewById(R.id.chipGroup);
-        addParticipantButton = findViewById(R.id.addParticipant_button);
-        mButtonSave = findViewById(R.id.saveMetting_button);
+        Button addParticipantButton = findViewById(R.id.addParticipant_button);
+        Button mButtonSave = findViewById(R.id.saveMetting_button);
 
         //Spinner to choose meeting room :
         final ArrayList<String> meetingRooms = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.meeting_rooms_arrays)));
@@ -118,7 +116,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         //Affichage toolbar avec flèche retour
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         //AutocompleteTextView + chips to add the participants :
         ArrayAdapter<CharSequence> adapterParticipants = ArrayAdapter.createFromResource(this,
@@ -158,9 +156,11 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
         int id = getIntent().getIntExtra("id", -1);
 
+
         // click à partir d'un item
         if (id != -1) {
-            meeting = mApiService.getMeetings().get(id);
+
+            Meeting meeting = mApiService.getMeetings().get(id);
 
             int position = spinnerAdapter.getPosition(meeting.getMeetingRoom().getmNameRoom());
             mMeetingRoomsSpinner.setSelection(position);
@@ -222,7 +222,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
 //             click à partir du FLOAT (création ou modif meeting)
 
-            mMeetingName.setHint("Nom de la réunion");
+            mMeetingName.setHint(R.string.meeting_name);
 
             mDateEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -251,7 +251,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                 public void onClick(View v) {
 
 
-                    //Gestion des cas où l'utilisateur ne rempli pas tous les champs
+                    //Gestion des cas où l'utilisateur ne remplit pas tous les champs
                     if (mMeetingName.getText().toString().equals("")) {
                         Context context = getApplicationContext();
                         CharSequence text = "Veuillez SVP nommer votre réunion";
@@ -428,7 +428,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                 mBeginTimeEdit.setText(timeString);
 
                 Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(Calendar.HOUR, hour);
+                calendar1.set(Calendar.HOUR_OF_DAY, hour);
                 calendar1.set(Calendar.MINUTE, minute);
 
                 CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
@@ -449,14 +449,14 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         int MINUTE = calendar1.get(Calendar.MINUTE);
 
         boolean is24hourFormat = DateFormat.is24HourFormat(this);
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        final TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
 
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
                 String timeString = hour + " " + minute;
                 mEndTimeEdit.setText(timeString);
                 Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(Calendar.HOUR, hour);
+                calendar1.set(Calendar.HOUR_OF_DAY, hour);
                 calendar1.set(Calendar.MINUTE, minute);
                 CharSequence timeTexte = DateFormat.format("HH:mm", calendar1);
                 mEndTimeEdit.setText(timeTexte);

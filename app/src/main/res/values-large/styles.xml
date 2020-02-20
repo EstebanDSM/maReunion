@@ -20,7 +20,7 @@
 
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">@dimen/normal</item>
+        <item name="android:textSize">@dimen/large</item>
     </style>
 
 </resources>

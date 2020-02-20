@@ -72,7 +72,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     }
 
     @Override
-    public void getMeetingsFilterRoom(String salle) {
+    public List<Meeting> getMeetingsFilterRoom(String salle) {
         List<Meeting> res = new ArrayList<>();
 
         for (Meeting m : mMeetings) {
@@ -80,8 +80,7 @@ public class DummyMeetingApiService implements MeetingApiService {
                 res.add(m);
             }
         }
-        mMeetings.clear();
-        mMeetings.addAll(res);
+        return res;
     }
 
 
@@ -110,7 +109,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
 
     @Override
-    public void getMeetingsByDate(DateTime mDate) {
+    public List<Meeting> getMeetingsByDate(DateTime mDate) {
         List<Meeting> res = new ArrayList<>();
 
         for (Meeting m : mMeetings) {
@@ -119,7 +118,6 @@ public class DummyMeetingApiService implements MeetingApiService {
 
             }
         }
-        mMeetings.clear();
-        mMeetings.addAll(res);
+        return res;
     }
 }

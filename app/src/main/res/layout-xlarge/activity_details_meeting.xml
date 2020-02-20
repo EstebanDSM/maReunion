@@ -13,240 +13,232 @@
         android:orientation="vertical">
 
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
 
-
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/toolbar" />
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusableInTouchMode="true">
-
-
-
-        <Button
-            android:id="@+id/saveMetting_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="25dp"
-            android:background="@color/design_default_color_primary"
-            android:paddingStart="8dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="0dp"
-            android:text="@string/save_button"
-            android:textSize="@dimen/x_large"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/background_light"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <Button
-            android:id="@+id/addParticipant_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="24dp"
-            android:background="@color/design_default_color_primary"
-            android:paddingStart="8dp"
-            android:paddingTop="0dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="0dp"
-            android:text="@string/add_participant"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@android:color/background_light"
-            android:textSize="@dimen/x_large"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:backgroundTint="@color/colorPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:prompt="@string/meeting_room"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.272"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-            android:id="@+id/date_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:text="@string/date"
-            android:textAlignment="center"
-            android:textSize="@dimen/x_large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/meetingName_TextInputLayout" />
-
-        <TextView
-            android:id="@+id/heure_début"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/begin_hour_2points"
-            android:textSize="@dimen/x_large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/date_textView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="56dp"
-            android:text="@string/finish_hour_2points"
-            android:textSize="@dimen/x_large"
-            app:layout_constraintEnd_toEndOf="@+id/heure_début"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heure_début" />
-
-        <Button
-            android:id="@+id/beginTimeEdit_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:hint="@string/begin_hour"
-            android:maxLines="1"
-            android:textSize="@dimen/x_large"
-            android:inputType="time"
-            android:imeOptions="actionDone"
-            app:layout_constraintBottom_toBottomOf="@+id/heure_début"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/heure_début"
-            app:layout_constraintTop_toTopOf="@+id/heure_début" />
-
-        <Button
-            android:id="@+id/endTimeEdit_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/finish_hour"
-            android:maxLines="1"
-            android:textSize="@dimen/x_large"
-            android:inputType="time"
-            android:imeOptions="actionDone"
-            app:layout_constraintBottom_toBottomOf="@+id/textView2"
-            app:layout_constraintStart_toStartOf="@+id/beginTimeEdit_TextView"
-            app:layout_constraintTop_toTopOf="@+id/textView2" />
-
-        <Button
-            android:id="@+id/dateEdit_TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:ems="10"
-            android:hint="@string/meeting_date"
-            android:imeOptions="actionDone"
-            android:inputType="date"
-
-            android:textSize="@dimen/x_large"
-            app:layout_constraintBottom_toBottomOf="@+id/date_textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/date_textView"
-            app:layout_constraintTop_toTopOf="@+id/date_textView"
-            app:layout_constraintVertical_bias="0.571" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:text="@string/meeting_room"
-            android:textSize="@dimen/x_large"
-            app:layout_constraintStart_toStartOf="@+id/textView2"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
-        <View
-            android:id="@+id/divider"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="@android:color/darker_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
-
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup"
-            android:layout_width="0dp"
             android:layout_height="wrap_content"
-
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="@+id/divider"
-            app:layout_constraintTop_toBottomOf="@+id/divider">
-
-        </com.google.android.material.chip.ChipGroup>
+            android:focusableInTouchMode="true">
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/meetingName_TextInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:layout_marginStart="16dp"
-            android:ems="10"
-
-            android:inputType="text"
-            android:maxLines="1"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/meetingName_editText"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/saveMetting_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="text"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="25dp"
+                android:background="@color/design_default_color_primary"
+                android:paddingStart="8dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="0dp"
+                android:text="@string/save_button"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/background_light"
                 android:textSize="@dimen/x_large"
-                tools:ignore="LabelFor"
-
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:hint="@string/participants"
-            android:minWidth="32dp"
-            app:layout_constraintEnd_toStartOf="@+id/addParticipant_button"
-            app:layout_constraintStart_toStartOf="@+id/textView4"
-            app:layout_constraintTop_toBottomOf="@+id/spinner">
+            <Button
+                android:id="@+id/addParticipant_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="24dp"
+                android:background="@color/design_default_color_primary"
+                android:paddingStart="8dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="0dp"
+                android:text="@string/add_participant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/background_light"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
-            <AutoCompleteTextView
-                android:id="@+id/participant_autoCompleteTextView"
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:prompt="@string/meeting_room"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.272"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/date"
+                android:textAlignment="center"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/meetingName_TextInputLayout" />
+
+            <TextView
+                android:id="@+id/heure_début"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="56dp"
+                android:text="@string/begin_hour_2points"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/date_textView" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="56dp"
+                android:text="@string/finish_hour_2points"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintEnd_toEndOf="@+id/heure_début"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heure_début" />
+
+            <Button
+                android:id="@+id/beginTimeEdit_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:hint="@string/begin_hour"
+                android:imeOptions="actionDone"
+                android:inputType="time"
+                android:maxLines="1"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintBottom_toBottomOf="@+id/heure_début"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/heure_début"
+                app:layout_constraintTop_toTopOf="@+id/heure_début" />
+
+            <Button
+                android:id="@+id/endTimeEdit_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/finish_hour"
+                android:maxLines="1"
+                android:textSize="@dimen/x_large"
+
+
+                app:layout_constraintBottom_toBottomOf="@+id/textView2"
+                app:layout_constraintStart_toStartOf="@+id/beginTimeEdit_TextView"
+                app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+            <Button
+                android:id="@+id/dateEdit_TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:ems="10"
+                android:hint="@string/meeting_date"
+
+
+                android:textSize="@dimen/x_large"
+                app:layout_constraintBottom_toBottomOf="@+id/date_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/date_textView"
+                app:layout_constraintTop_toTopOf="@+id/date_textView"
+                app:layout_constraintVertical_bias="0.571" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="@string/meeting_room"
+                android:textSize="@dimen/x_large"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+            <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textSize="@dimen/x_large"
-                android:imeOptions="actionDone"
+                android:layout_height="1dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@android:color/darker_gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
+
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="@+id/divider"
+                app:layout_constraintTop_toBottomOf="@+id/divider">
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/meetingName_TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="56dp"
+                android:ems="10"
                 android:inputType="text"
                 android:maxLines="1"
-                tools:ignore="LabelFor" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <EditText
+                    android:id="@+id/meetingName_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="text"
+                    android:textSize="@dimen/x_large"
+                    tools:ignore="LabelFor" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:hint="@string/participants"
+                android:minWidth="32dp"
+                app:layout_constraintEnd_toStartOf="@+id/addParticipant_button"
+                app:layout_constraintStart_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toBottomOf="@+id/spinner">
+
+                <AutoCompleteTextView
+                    android:id="@+id/participant_autoCompleteTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="@dimen/x_large"
+                    tools:ignore="LabelFor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 

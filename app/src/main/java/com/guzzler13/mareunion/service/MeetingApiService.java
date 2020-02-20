@@ -45,7 +45,7 @@ public interface MeetingApiService {
     /**
      * Get all Meetings in order of Rooms
      */
-    void getMeetingsFilterRoom(String salle);
+    List<Meeting> getMeetingsFilterRoom(String salle);
 
 
     /**
@@ -59,7 +59,7 @@ public interface MeetingApiService {
     List<Room> getRooms();
 
 
-    void getMeetingsByDate(DateTime mDate);
+    List<Meeting> getMeetingsByDate(DateTime mDate);
 
 
 }
