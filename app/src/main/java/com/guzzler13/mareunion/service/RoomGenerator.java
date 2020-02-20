@@ -13,6 +13,8 @@ public class RoomGenerator {
 
     private static List<Room> LIST_ROOM = Arrays.asList(
 
+            //Nom des salles avec leur couleur correspondante
+
             new Room("Peach", R.drawable.ic_brightness_1_amber_300_24dp),
             new Room("Mario", R.drawable.ic_brightness_1_brown_300_24dp),
             new Room("Luigi", R.drawable.ic_brightness_1_deep_orange_300_24dp),
@@ -29,6 +31,5 @@ public class RoomGenerator {
     public static List<Room> generateRooms() {
         return new ArrayList<>(LIST_ROOM);
     }
-
 
 }

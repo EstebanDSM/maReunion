@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/design_default_color_primary"
                 android:paddingStart="8dp"
                 android:paddingTop="0dp"
@@ -39,22 +39,6 @@
                 android:textColor="@android:color/background_light"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/addParticipant_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:background="@color/design_default_color_primary"
-                android:paddingStart="8dp"
-                android:paddingTop="0dp"
-                android:paddingEnd="8dp"
-                android:paddingBottom="0dp"
-                android:text="@string/add_participant"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textColor="@android:color/background_light"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
 
             <Spinner
@@ -79,7 +63,7 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/date"
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/meetingName_TextInputLayout" />
 
@@ -90,7 +74,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
                 android:text="@string/begin_hour_2points"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/date_textView" />
 
@@ -101,7 +85,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/finish_hour_2points"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintEnd_toEndOf="@+id/heure_début"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/heure_début" />
@@ -116,7 +100,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLines="1"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/heure_début"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/heure_début"
@@ -130,7 +114,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="time"
                 android:maxLines="1"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/textView2"
                 app:layout_constraintStart_toStartOf="@+id/beginTimeEdit_TextView"
                 app:layout_constraintTop_toTopOf="@+id/textView2" />
@@ -145,7 +129,7 @@
                 android:imeOptions="actionDone"
                 android:inputType="date"
 
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/date_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/date_textView"
@@ -158,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:text="@string/meeting_room"
-                android:textSize="18sp"
+                android:textSize="@dimen/normal"
                 app:layout_constraintStart_toStartOf="@+id/textView2"
                 app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
@@ -179,6 +163,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+
                 app:layout_constraintStart_toStartOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/divider">
 
@@ -190,6 +175,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
+                android:layout_marginStart="16dp"
                 android:ems="10"
 
 
@@ -208,7 +194,7 @@
 
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/normal"
                     tools:ignore="LabelFor"
 
                     />
@@ -219,10 +205,11 @@
                 android:id="@+id/textInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
                 android:hint="@string/participants"
                 android:minWidth="32dp"
                 app:layout_constraintEnd_toStartOf="@+id/addParticipant_button"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toBottomOf="@+id/spinner">
 
@@ -233,10 +220,28 @@
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:textSize="18sp"
-                    tools:ignore="LabelFor" />
+                    android:textSize="@dimen/normal"
+                    tools:ignore="LabelFor"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="369dp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/addParticipant_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@color/design_default_color_primary"
+                android:paddingStart="8dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="0dp"
+                android:text="@string/add_participant"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="@android:color/background_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayout" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,5 +8,5 @@
 
     android:padding="5dip"
     android:textColor="#808080"
-    android:textSize="18sp" />
+    android:textSize="@dimen/normal" />
 

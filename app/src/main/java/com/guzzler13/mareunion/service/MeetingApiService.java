@@ -18,14 +18,12 @@ public interface MeetingApiService {
 
     /**
      * Get all Meetings in order of date
-     *
      */
     void getMeetingsByOrderDate();
 
 
     /**
      * Get all Meetings in Reverse order of date
-     *
      */
     void getMeetingsByReverseOrderDate();
 
@@ -40,14 +38,12 @@ public interface MeetingApiService {
 
     /**
      * Get all Meetings in order of Rooms
-     *
      */
     void getMeetingsByRoom();
 
 
     /**
      * Get all Meetings in order of Rooms
-     *
      */
     void getMeetingsFilterRoom(String salle);
 
@@ -60,10 +56,10 @@ public interface MeetingApiService {
     void addMeeting(Meeting meeting);
 
 
-    List<Room> getRooms ();
+    List<Room> getRooms();
 
 
-    List<Meeting> getMeetingsByDate(DateTime mDate);
+    void getMeetingsByDate(DateTime mDate);
 
 
 }

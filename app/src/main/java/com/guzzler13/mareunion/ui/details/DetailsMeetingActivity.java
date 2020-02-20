@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
@@ -17,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -132,7 +134,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
                     String participant;
                     participant = mParticipantsAutoCompleteTextView.getText().toString();
-                    // ensure it's an e-mail
+
+                    // Vérifier que l'utilisateur renseigne un e-mail
                     if (!android.util.Patterns.EMAIL_ADDRESS.matcher(participant).matches() || participant.isEmpty()) {
                         Toast.makeText(DetailsMeetingActivity.this, R.string.its_not_an_email_message
                                 , Toast.LENGTH_SHORT).show();
@@ -168,6 +171,22 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             String hourBegin = meeting.getDateBegin().toString("HH:mm");
             String hourEnd = meeting.getDateEnd().toString("HH:mm");
             mMeetingName.setText(nameReunion);
+
+            //Taille police mMeetingName suivant taille écran
+            if ((getResources().getConfiguration().screenLayout &
+                    Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                    Configuration.SCREENLAYOUT_SIZE_XLARGE) {
+                mMeetingName.setTextSize(60);
+            } else if ((getResources().getConfiguration().screenLayout &
+                    Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                    Configuration.SCREENLAYOUT_SIZE_NORMAL) {
+                mMeetingName.setTextSize(40);
+            } else if ((getResources().getConfiguration().screenLayout &
+                    Configuration.SCREENLAYOUT_SIZE_MASK) ==
+                    Configuration.SCREENLAYOUT_SIZE_LARGE) {
+                mMeetingName.setTextSize(50);
+            }
+
             mMeetingName.setEnabled(false);
             mMeetingName.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
             mMeetingName.setTextColor(getResources().getColor(R.color.colorBlack));
@@ -323,6 +342,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
                         //Gestion de la disponibilité des salles
                         for (Meeting m : mApiService.getMeetings()) {
+                            DateTime dateTime = new DateTime(DateTime.now());
                             if (m.getMeetingRoom().getmNameRoom().equals(mMeetingRoomsSpinner.getSelectedItem().toString())) {
                                 if ((mBeginCompleteJoda.isBefore(m.getDateEnd()) && mBeginCompleteJoda.isAfter(m.getDateBegin()))
                                         || (mEndCompleteJoda.isBefore(m.getDateEnd()) && mEndCompleteJoda.isAfter(m.getDateBegin()))
@@ -332,12 +352,25 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                                         || m.getDateEnd().isBefore(mEndCompleteJoda) && m.getDateEnd().isAfter(mBeginCompleteJoda)) {
 
                                     Context context = getApplicationContext();
-                                    CharSequence text = "Problème de salle";
+                                    CharSequence text = "Cette salle est déjà réservée";
                                     int duration = Toast.LENGTH_LONG;
                                     Toast toast = Toast.makeText(context, text, duration);
                                     toast.show();
                                     break;
-                                } else {
+                                } else if (mBeginCompleteJoda.isEqualNow() || mBeginCompleteJoda.isBefore(dateTime.plusMinutes(17))) {
+                                    Context context = getApplicationContext();
+                                    CharSequence text = "Attention il faut en moyenne 17 min pour trouver la salle";
+                                    int duration = Toast.LENGTH_LONG;
+                                    Toast toast = Toast.makeText(context, text, duration);
+                                    toast.show();
+                                    break;
+                                }
+
+
+
+
+
+                                else {
                                     mApiService.addMeeting(meeting);
                                     mParticipantsChipGroup.removeAllViews();
                                     Intent intent = new Intent(DetailsMeetingActivity.this, MeetingListActivity.class);
@@ -439,7 +472,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         int MONTH = calendar.get(Calendar.MONTH);
         int DATE = calendar.get(Calendar.DATE);
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        final DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int date) {

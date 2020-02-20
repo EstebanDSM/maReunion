@@ -110,7 +110,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
 
     @Override
-    public List<Meeting> getMeetingsByDate(DateTime mDate) {
+    public void getMeetingsByDate(DateTime mDate) {
         List<Meeting> res = new ArrayList<>();
 
         for (Meeting m : mMeetings) {
@@ -119,6 +119,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
             }
         }
-        return res;
+        mMeetings.clear();
+        mMeetings.addAll(res);
     }
 }

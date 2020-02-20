@@ -2,7 +2,6 @@ package com.guzzler13.mareunion.ui.list;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.guzzler13.mareunion.R;
-import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
-import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -30,7 +27,6 @@ import java.util.List;
 public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.ViewHolder> {
 
     private List<Meeting> mMeetings;
-    private MeetingApiService mApiService = DI.getMeetingApiService();
 
 
     MeetingListAdapter(List<Meeting> items) {
@@ -73,9 +69,6 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
-
-                int sizeList = mMeetings.size();
-                Log.e("size", Integer.toString(sizeList));
             }
         });
 
