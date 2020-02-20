@@ -4,12 +4,12 @@
     <string name="by_place">Par lieu</string>
     <string name="save_button">Enregistrer</string>
     <string name="date">Date :</string>
-    <string name="begin_hour">00:00</string>
-    <string name="finish_hour">00:00</string>
-    <string name="meeting_date">Exemple : 25/08/1976</string>
-    <string name="meeting_name">Nom de la réunion (Exemple : Logistique)</string>
+    <string name="begin_hour">Cliquer ici</string>
+    <string name="finish_hour">Cliquer ici</string>
+    <string name="meeting_date">Cliquer ici</string>
+    <string name="meeting_name">Nom de la réunion</string>
     <string name="meeting_room">Salle de réunion :</string>
-    <string name="participants">Participant</string>
+    <string name="participants">Participants</string>
     <string name="add_participant">Ajouter</string>
     <string name="begin_hour_2points">Heure de début :</string>
     <string name="finish_hour_2points">Heure de fin :</string>

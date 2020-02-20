@@ -12,7 +12,7 @@ import java.util.List;
 abstract class DummyMeetingGenerator {
 
     private static final DateTime dateTimeMeeting0 = new DateTime(2020, 2, 25, 10, 0);
-    private static final DateTime dateTimeEndMeeting0 = new DateTime(2012, 2, 25, 10, 45);
+    private static final DateTime dateTimeEndMeeting0 = new DateTime(2020, 2, 25, 10, 45);
     private static final DateTime dateTimeMeeting1 = new DateTime(2020, 2, 26, 18, 0);
     private static final DateTime dateTimeEndMeeting1 = new DateTime(2020, 2, 26, 19, 0);
     private static final DateTime dateTimeMeeting2 = new DateTime(2020, 2, 24, 9, 0);

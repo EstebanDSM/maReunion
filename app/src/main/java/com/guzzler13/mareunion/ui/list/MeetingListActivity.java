@@ -52,6 +52,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
 
         FloatingActionButton btnFab = findViewById(R.id.btnFab);
+
         btnFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
