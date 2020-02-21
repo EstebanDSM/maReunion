@@ -174,8 +174,8 @@
                 android:id="@+id/meetingName_TextInputLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="56dp"
                 android:ems="10"
 
 

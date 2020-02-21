@@ -16,17 +16,14 @@
     <string name="choose_meetingRoom">Veuillez choisir une salle</string>
     <string name="its_not_an_email_message">Veuillez entrer un e-mail valide</string>
     <string name="field_isEmpty">Veuillez renseigner tout les champs</string>
-    <string name="error_message">Veuillez renseigner tout les champs</string>
-    <string name="error_message_meeting_room">La salle de réunion est déjà réservée aux heures indiquées, veuillez faire les modifications nécessaires</string>
-    <string name="error_message_time">L\'heure de fin de réunion est avant l\'heure de début</string>
-    <string name="error_message_date_and_time">Veuillez remplir les champs date et heures</string>
+
     <string name="room01">Peach</string>
     <string name="room02">Mario</string>
     <string name="room03">Luigi</string>
     <string name="room04">Toad</string>
     <string name="room05">Bowser</string>
     <string name="room06">Yoshi</string>
-    <string name="room07">Mario</string>
+    <string name="room07">Wario</string>
     <string name="room08">Daisy</string>
     <string name="room09">Harmonie</string>
     <string name="room10">Pokey</string>

@@ -18,7 +18,7 @@
                 <item
                     android:id="@+id/Luigi"
                     android:checkable="false"
-                    android:title="Luigi" />
+                    android:title="Peach" />
 
                 <item
                     android:id="@+id/Mario"
@@ -28,7 +28,7 @@
                 <item
                     android:id="@+id/Wario"
                     android:checkable="false"
-                    android:title="Wario" />
+                    android:title="Luigi" />
 
                 <item
                     android:id="@+id/Toad"
@@ -48,12 +48,13 @@
                 <item
                     android:id="@+id/Daisy"
                     android:checkable="false"
-                    android:title="Daisy" />
+                    android:title="Wario" />
+
 
                 <item
                     android:id="@+id/Peach"
                     android:checkable="false"
-                    android:title="Peach" />
+                    android:title="Daisy" />
 
                 <item
                     android:id="@+id/Harmonie"

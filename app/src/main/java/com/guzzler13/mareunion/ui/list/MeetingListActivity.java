@@ -119,10 +119,6 @@ public class MeetingListActivity extends AppCompatActivity {
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
-            case R.id.Bowser:
-                filterItemRoom("Bowser");
-                return true;
-
             case R.id.Peach:
                 filterItemRoom("Peach");
                 return true;
@@ -131,28 +127,30 @@ public class MeetingListActivity extends AppCompatActivity {
                 filterItemRoom("Mario");
                 return true;
 
-            case R.id.Wario:
-                filterItemRoom("Wario");
+            case R.id.Luigi:
+                filterItemRoom("Luigi");
                 return true;
 
             case R.id.Toad:
                 filterItemRoom("Toad");
                 return true;
 
-            case R.id.Harmonie:
-                filterItemRoom("Harmonie");
+            case R.id.Bowser:
+                filterItemRoom("Bowser");
                 return true;
 
             case R.id.Yoshi:
                 filterItemRoom("Yoshi");
                 return true;
-
-            case R.id.Luigi:
-                filterItemRoom("Luigi");
+            case R.id.Wario:
+                filterItemRoom("Wario");
                 return true;
 
             case R.id.Daisy:
                 filterItemRoom("Daisy");
+                return true;
+            case R.id.Harmonie:
+                filterItemRoom("Harmonie");
                 return true;
 
             case R.id.Pokey:
