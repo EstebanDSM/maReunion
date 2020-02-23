@@ -16,9 +16,10 @@ import java.util.List;
  */
 public class DummyMeetingApiService implements MeetingApiService {
 
+
+    public static List<Meeting> mMeetingsTemp;
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
     private List<Room> mRooms = RoomGenerator.generateRooms();
-
 
     /**
      * {@inheritDoc}
@@ -54,7 +55,6 @@ public class DummyMeetingApiService implements MeetingApiService {
                 return o2.getDateBegin().compareTo(o1.getDateBegin());
             }
         });
-
     }
 
 
@@ -74,7 +74,6 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public List<Meeting> getMeetingsFilterRoom(String salle) {
         List<Meeting> res = new ArrayList<>();
-
         for (Meeting m : mMeetings) {
             if (m.getMeetingRoom().getmNameRoom().equals(salle)) {
                 res.add(m);
@@ -109,15 +108,16 @@ public class DummyMeetingApiService implements MeetingApiService {
 
 
     @Override
-    public List<Meeting> getMeetingsByDate(DateTime mDate) {
-        List<Meeting> res = new ArrayList<>();
+    public void getMeetingsByDate(DateTime mDate) {
+        mMeetingsTemp = mMeetings;
 
+        List<Meeting> res = new ArrayList<>();
         for (Meeting m : mMeetings) {
             if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
                 res.add(m);
-
             }
         }
-        return res;
+        mMeetings.clear();
+        mMeetings.addAll(res);
     }
 }

@@ -1,7 +1,6 @@
 package com.guzzler13.mareunion.ui.details;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Color;
@@ -15,7 +14,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,12 +26,11 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.model.Meeting;
-import com.guzzler13.mareunion.model.Room;
 import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.list.MeetingListActivity;
 import com.guzzler13.mareunion.utils.AddChip;
-import com.guzzler13.mareunion.utils.SetColorMeeting;
-import com.guzzler13.mareunion.utils.SetID;
+import com.guzzler13.mareunion.utils.NewMeeting;
+import com.guzzler13.mareunion.utils.ShowToastAddingMeeting;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -43,7 +40,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static com.guzzler13.mareunion.utils.AutocompleteTextViewAdapter.AutocompleteTextViewAdapter;
+import static com.guzzler13.mareunion.utils.AutocompleteTextViewAdapter.Autocomplete;
 import static com.guzzler13.mareunion.utils.TimeUtils.beginTimeHandle;
 import static com.guzzler13.mareunion.utils.TimeUtils.dateHandle;
 import static com.guzzler13.mareunion.utils.TimeUtils.endTimeHandle;
@@ -121,8 +118,8 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
-        //AutocompleteTextViewAdapter + chips to add the participants :
-        AutocompleteTextViewAdapter(mParticipantsAutoCompleteTextView, this, addParticipantButton, mParticipantsChipGroup, getDrawable(R.drawable.ic_person_pin_black_18dp));
+        //Autocomplete + chips to add the participants :
+        Autocomplete(mParticipantsAutoCompleteTextView, this, addParticipantButton, mParticipantsChipGroup, getDrawable(R.drawable.ic_person_pin_black_18dp));
 
         int id = getIntent().getIntExtra("id", -1);
 
@@ -192,7 +189,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
         } else {
 
-//             click à partir du FLOAT (création ou modif meeting)
+//             click à partir du FLOAT (création meeting)
 
             mMeetingName.setHint(R.string.meeting_name);
 
@@ -209,7 +206,6 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                     beginTimeHandle(mBeginTimeEdit, getApplicationContext());
                 }
             });
-
             mEndTimeEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -224,18 +220,19 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
                     //Gestion des cas où l'utilisateur ne remplit pas tous les champs
                     if (mMeetingName.getText().toString().equals("")) {
-                        showToast("Veuillez SVP nommer votre réunion");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP nommer votre réunion", getApplicationContext());
                     } else if (mDateEdit.getText().toString().equals("")) {
-                        showToast("Veuillez SVP définir une date");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP définir une date", getApplicationContext());
                     } else if (mBeginTimeEdit.getText().toString().equals("")) {
-                        showToast("Veuillez SVP définir l'heure de début");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP définir l'heure de début", getApplicationContext());
                     } else if (mEndTimeEdit.getText().toString().equals("")) {
-                        showToast("Veuillez SVP définir l'heure de fin");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP définir l'heure de fin", getApplicationContext());
                     } else if (mMeetingRoomsSpinner.getSelectedItem().toString().equals("Veuillez choisir une salle")) {
-                        showToast("Veuillez SVP choisir une salle");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP choisir une salle", getApplicationContext());
                     } else if (mParticipantsChipGroup.getChildCount() == 0) {
-                        showToast("Veuillez SVP renseigner les adresses mail des participants");
+                        ShowToastAddingMeeting.showToast("Veuillez SVP renseigner les adresses mail des participants", getApplicationContext());
                     } else {
+
 
                         //String vers DateTime
                         DateTimeFormatter formatterDate = DateTimeFormat.forPattern("dd/MM/yyyy");
@@ -252,50 +249,34 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         String mParticipants = "";
                         for (int i = 0; i < mParticipantsChipGroup.getChildCount(); i++) {
                             Chip chip = (Chip) mParticipantsChipGroup.getChildAt(i);
-                            if (mParticipantsChipGroup.getChildAt(i).getId() == 1) {
-                                mParticipants = chip.getText().toString().concat(mParticipants);
-                            } else
-                                mParticipants = chip.getText().toString().concat(", " + mParticipants);
+                            mParticipants = chip.getText().toString().concat(", " + mParticipants);
                         }
 
-                        //Création nouveau meeting
-                        Meeting meeting = new Meeting(
-                                SetID.SetId(mApiService),
-                                mMeetingName.getText().toString(),
-                                new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfMonth(), mBeginTimeEditJoda.getHourOfDay(), mBeginTimeEditJoda.getMinuteOfHour()),
-                                new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfMonth(), mEndTimeEditJoda.getHourOfDay(), mEndTimeEditJoda.getMinuteOfHour()),
-                                mParticipants,
-                                new Room(mMeetingRoomsSpinner.getSelectedItem().toString(), SetColorMeeting.SetColor(mMeetingRoomsSpinner.getSelectedItem().toString())));
+
+                        Meeting meeting = NewMeeting.meeting(mApiService, mMeetingName, mDateEditJoda, mBeginTimeEditJoda, mEndTimeEditJoda, mParticipants, mMeetingRoomsSpinner);
 
 
                         //Gestion de la disponibilité des salles
+                        boolean reserved = false;
                         for (Meeting m : mApiService.getMeetings()) {
-
                             if (m.getMeetingRoom().getmNameRoom().equals(mMeetingRoomsSpinner.getSelectedItem().toString()) &&
-
                                     ((mBeginCompleteJoda.isBefore(m.getDateEnd()) && mBeginCompleteJoda.isAfter(m.getDateBegin()))
                                             || (mEndCompleteJoda.isBefore(m.getDateEnd()) && mEndCompleteJoda.isAfter(m.getDateBegin()))
                                             || mBeginCompleteJoda.isEqual(m.getDateBegin())
                                             || mEndCompleteJoda.isEqual(m.getDateEnd())
                                             || m.getDateBegin().isAfter(mBeginCompleteJoda) && m.getDateBegin().isBefore(mEndCompleteJoda)
                                             || m.getDateEnd().isBefore(mEndCompleteJoda) && m.getDateEnd().isAfter(mBeginCompleteJoda))) {
-
-
-                                Context context = getApplicationContext();
-                                CharSequence text = "Cette salle est déjà réservée";
-                                int duration = Toast.LENGTH_LONG;
-                                Toast toast = Toast.makeText(context, text, duration);
-                                toast.show();
-                                break;
-
-
-                            } else {
-                                mApiService.addMeeting(meeting);
-                                mParticipantsChipGroup.removeAllViews();
-                                Intent intent = new Intent(DetailsMeetingActivity.this, MeetingListActivity.class);
-                                startActivity(intent);
+                                reserved = true;
                                 break;
                             }
+                        }
+                        if (reserved) {
+                            ShowToastAddingMeeting.showToast("Cette salle est déjà réservée", getApplicationContext());
+
+                        } else {
+                            mApiService.addMeeting(meeting);
+                            Intent intent = new Intent(DetailsMeetingActivity.this, MeetingListActivity.class);
+                            startActivity(intent);
                         }
                     }
                 }
@@ -309,12 +290,4 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
-    private void showToast(String string) {
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, string, duration);
-        toast.show();
-    }
 }
-

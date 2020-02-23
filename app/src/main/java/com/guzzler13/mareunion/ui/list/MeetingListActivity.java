@@ -31,7 +31,6 @@ import java.util.Calendar;
 public class MeetingListActivity extends AppCompatActivity {
 
     private MeetingApiService mApiService;
-
     private RecyclerView.Adapter mMeetingListAdapter;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private RecyclerView mRecyclerView;
@@ -65,7 +64,6 @@ public class MeetingListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mDateSetListener = generateDatePickerDialog();
-
 
     }
 
@@ -103,7 +101,6 @@ public class MeetingListActivity extends AppCompatActivity {
                 return true;
 
             case R.id.filtre_date_décroissante:
-
                 mApiService.getMeetingsByReverseOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
@@ -173,10 +170,8 @@ public class MeetingListActivity extends AppCompatActivity {
                 mMeetingListAdapter = new MeetingListAdapter(mApiService.getMeetings());
                 mRecyclerView.setAdapter(mMeetingListAdapter);
 
-
                 mApiService.getMeetingsByDate(time);
                 mMeetingListAdapter.notifyDataSetChanged();
-
             }
         };
     }

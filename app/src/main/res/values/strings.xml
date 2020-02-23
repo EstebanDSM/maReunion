@@ -27,5 +27,11 @@
     <string name="room08">Daisy</string>
     <string name="room09">Harmonie</string>
     <string name="room10">Pokey</string>
+    <string name="item_text_reunion">Réunion 1</string>
+    <string name="item_text_mail">Marty.McFly@gmail.com</string>
+    <string name="item_text_room">Guzzler13</string>
+    <string name="item_text_date">08h00</string>
+    <string name="item_text_meeting">Réunion 1</string>
+    <string name="trash">trash</string>
 
 </resources>

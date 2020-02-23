@@ -18,6 +18,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.service.DummyMeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -47,6 +48,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
+        DummyMeetingApiService.mMeetingsTemp = mMeetings;
         final Meeting meeting = mMeetings.get(position);
 
         if (position % 2 == 0) {
@@ -87,6 +89,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     @Override
     public int getItemCount() {
         return mMeetings.size();
+
     }
 
 

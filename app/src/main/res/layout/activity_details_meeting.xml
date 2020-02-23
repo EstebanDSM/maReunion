@@ -12,7 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-
         <include
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
@@ -48,10 +47,8 @@
                 android:layout_marginTop="8dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:prompt="@string/meeting_room"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.272"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
@@ -128,7 +125,6 @@
                 android:hint="@string/meeting_date"
                 android:imeOptions="actionDone"
                 android:inputType="date"
-
                 android:textSize="@dimen/normal"
                 app:layout_constraintBottom_toBottomOf="@+id/date_textView"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -163,7 +159,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-
                 app:layout_constraintStart_toStartOf="@+id/divider"
                 app:layout_constraintTop_toBottomOf="@+id/divider">
 
@@ -177,11 +172,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="56dp"
                 android:ems="10"
-
-
                 android:inputType="text"
                 android:maxLines="1"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -191,13 +183,10 @@
                     android:id="@+id/meetingName_editText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:textSize="@dimen/normal"
-                    tools:ignore="LabelFor"
-
-                    />
+                    tools:ignore="LabelFor" />
             </com.google.android.material.textfield.TextInputLayout>
 
 

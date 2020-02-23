@@ -20,25 +20,28 @@ abstract class DummyMeetingGenerator {
     private static final DateTime dateTimeMeeting3 = new DateTime(2020, 2, 26, 15, 0);
     private static final DateTime dateTimeEndMeeting3 = new DateTime(2020, 2, 26, 15, 45);
     private static final DateTime dateTimeMeeting4 = new DateTime(2020, 2, 27, 14, 30);
-    private static final DateTime dateTimeEndMeeting4 = new DateTime(2020, 2, 27, 15, 30);
+    private static final DateTime dateTimeEndMeeting4 = new DateTime(2020, 2, 27, 14, 45);
     private static final DateTime dateTimeMeeting5 = new DateTime(2020, 2, 27, 15, 30);
     private static final DateTime dateTimeEndMeeting5 = new DateTime(2020, 2, 27, 16, 30);
+    private static final DateTime dateTimeMeeting6 = new DateTime(2020, 2, 28, 15, 30);
+    private static final DateTime dateTimeEndMeeting6 = new DateTime(2020, 2, 28, 16, 30);
 
 
     private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
-            new Meeting(0, "Logistique et achats", dateTimeMeeting0, dateTimeEndMeeting0,
+            new Meeting(0, "Logistique", dateTimeMeeting0, dateTimeEndMeeting0,
                     "McFly@bttf.com", RoomGenerator.generateRooms().get(0)),
-            new Meeting(1, "Réunion B", dateTimeMeeting1, dateTimeEndMeeting1,
+            new Meeting(1, "Qualité", dateTimeMeeting1, dateTimeEndMeeting1,
                     "lucas@boulik.com, dark.vador@starwars.com, toto@smiley.com, abc123@jacksonFive.com", RoomGenerator.generateRooms().get(1)),
-            new Meeting(2, "Réunion C", dateTimeMeeting2, dateTimeEndMeeting2,
+            new Meeting(2, "Réception", dateTimeMeeting2, dateTimeEndMeeting2,
                     "doc@bttf.com", RoomGenerator.generateRooms().get(2)),
-            new Meeting(3, "Réunion D", dateTimeMeeting3, dateTimeEndMeeting3,
+            new Meeting(3, "Expédition", dateTimeMeeting3, dateTimeEndMeeting3,
                     "sarah.connor@inyourface.com", RoomGenerator.generateRooms().get(3)),
-            new Meeting(4, "Réunion E", dateTimeMeeting4, dateTimeEndMeeting4,
+            new Meeting(4, "Noël", dateTimeMeeting4, dateTimeEndMeeting4,
                     "skywalker@starwars.es", RoomGenerator.generateRooms().get(4)),
-            new Meeting(5, "Réunion F", dateTimeMeeting5, dateTimeEndMeeting5,
-                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(2))
-
+            new Meeting(5, "Production", dateTimeMeeting5, dateTimeEndMeeting5,
+                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(2)),
+            new Meeting(6, "Achats", dateTimeMeeting6, dateTimeEndMeeting6,
+                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(7))
     );
 
 

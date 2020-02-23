@@ -17,7 +17,8 @@ public class AutocompleteTextViewAdapter {
 
     //AutocompleteTextView + chips to add the participants :
 
-    public static void AutocompleteTextViewAdapter(final AutoCompleteTextView textView, final Context context, Button button, final ChipGroup chipgroup, final Drawable drawable) {
+
+    public static void Autocomplete(final AutoCompleteTextView textView, final Context context, Button button, final ChipGroup chipgroup, final Drawable drawable) {
 
 
         ArrayAdapter<CharSequence> adapterParticipants = ArrayAdapter.createFromResource(context, R.array.participants_arrays, android.R.layout.simple_dropdown_item_1line);
@@ -39,6 +40,7 @@ public class AutocompleteTextViewAdapter {
                                 , Toast.LENGTH_SHORT).show();
                     } else {
 
+
                         final Chip chip = AddChip.addChip(participant, chipgroup, drawable);
                         chip.setChipBackgroundColorResource(R.color.colorGreen);
                         chipgroup.addView(chip);
@@ -46,11 +48,13 @@ public class AutocompleteTextViewAdapter {
                             @Override
                             public void onClick(View view) {
                                 chipgroup.removeView(chip);
+
                             }
                         });
                     }
                 }
                 textView.setText("");
+
             }
         });
 
