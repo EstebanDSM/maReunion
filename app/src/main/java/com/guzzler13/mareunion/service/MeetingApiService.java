@@ -62,4 +62,5 @@ public interface MeetingApiService {
     List<Meeting> getMeetingsByDate(DateTime mDate);
 
 
+    void resetFilter();
 }

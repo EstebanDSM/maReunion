@@ -20,7 +20,7 @@ public class NewMeeting {
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), beginTime.getHourOfDay(), beginTime.getMinuteOfHour()),
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), endTime.getHourOfDay(), endTime.getMinuteOfHour()),
                 participants,
-                new Room(spinner.getSelectedItem().toString(), SetColorMeeting.SetColor(spinner.getSelectedItem().toString())));
+                new Room(spinner.getSelectedItem().toString(), SetColorMeeting.SetColor(spinner.getSelectedItem().toString())), false, false);
     }
 
 

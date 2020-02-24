@@ -20,6 +20,7 @@ import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
+import com.guzzler13.mareunion.service.DummyMeetingApiService;
 import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 import com.guzzler13.mareunion.utils.ShowToastAddingMeeting;
@@ -35,7 +36,6 @@ public class MeetingListActivity extends AppCompatActivity {
 
     private MeetingApiService mApiService;
     private RecyclerView.Adapter mMeetingListAdapter;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
     private RecyclerView mRecyclerView;
 
 
@@ -66,7 +66,6 @@ public class MeetingListActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mDateSetListener = generateDatePickerDialog();
 
     }
 
@@ -110,15 +109,14 @@ public class MeetingListActivity extends AppCompatActivity {
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
-            case R.id.selection_date:
-                configureDialogCalendar();
-                mDateSetListener = generateDatePickerDialog();
-                return true;
-
             case R.id.filtre_salle:
                 initList(mApiService.getMeetings());
                 mApiService.getMeetingsByRoom();
                 mMeetingListAdapter.notifyDataSetChanged();
+                return true;
+
+            case R.id.selection_date:
+                configureDialogCalendar();
                 return true;
 
             case R.id.Peach:
@@ -188,12 +186,13 @@ public class MeetingListActivity extends AppCompatActivity {
                         nothing = false;
                     }
                 }
-                if (nothing) {
-                    ShowToastAddingMeeting.showToast("Aucune réunion de prévue à cette date", getApplicationContext());
-                } else {
+                if (!nothing) {
                     initList(mApiService.getMeetingsByDate(time));
                     mApiService.getMeetingsByDate(time);
                     mMeetingListAdapter.notifyDataSetChanged();
+
+                } else {
+                    ShowToastAddingMeeting.showToast("Aucune réunion de prévue à cette date", getApplicationContext());
                 }
             }
         };

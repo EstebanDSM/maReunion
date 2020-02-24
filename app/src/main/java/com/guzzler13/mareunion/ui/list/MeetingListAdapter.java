@@ -18,22 +18,48 @@ import com.bumptech.glide.request.RequestOptions;
 import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
-import com.guzzler13.mareunion.service.DummyMeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.ViewHolder> {
 
+    public static boolean isFilterDate = false;
+    public static boolean isFilterRoom = false;
+    public static List<Meeting> filterList = new ArrayList<>();
     private List<Meeting> mMeetings;
 
-
     MeetingListAdapter(List<Meeting> items) {
-        mMeetings = items;
-    }
 
+
+        //On vide la liste filterList pour chaque filtre
+        filterList.clear();
+
+
+        //Si un filtre est déjà activé on le supprime pour les prochains filtres
+        if (isFilterRoom || isFilterDate) {
+            isFilterRoom = false;
+            isFilterDate = false;
+        }
+
+        //si un filtre est activé, on rempli la liste filterList avec les meetings correspondants
+        for (Meeting m : items) {
+            if (m.isFilterRoom()) {
+                filterList.add(m);
+                isFilterRoom = true;
+            } else if (m.isFilterDate()) {
+                filterList.add(m);
+                isFilterDate = true;
+            }
+        }
+
+        if (isFilterRoom || isFilterDate) {
+            mMeetings = filterList;
+        } else mMeetings = items;
+    }
 
     @NonNull
     @Override
@@ -88,6 +114,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     @Override
     public int getItemCount() {
+
         return mMeetings.size();
 
     }

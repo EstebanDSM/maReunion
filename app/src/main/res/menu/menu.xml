@@ -10,88 +10,118 @@
 
 
         <item
-            android:id="@+id/selection_date"
+            android:id="@+id/Filtrer"
             android:checkable="false"
-            android:title="Sélectionner date" />
-
-        <item
-            android:id="@+id/selection_salle"
-            android:checkable="false"
-            android:title="Sélectionner salle">
+            android:title="Filtrer">
 
             <menu>
-                <item
-                    android:id="@+id/Peach"
-                    android:checkable="false"
-                    android:title="@string/room01" />
-
-                <item
-                    android:id="@+id/Mario"
-                    android:checkable="false"
-                    android:title="@string/room02" />
-
-                <item
-                    android:id="@+id/Luigi"
-                    android:checkable="false"
-                    android:title="@string/room03" />
-
-                <item
-                    android:id="@+id/Toad"
-                    android:checkable="false"
-                    android:title="@string/room04" />
-
-                <item
-                    android:id="@+id/Bowser"
-                    android:checkable="false"
-                    android:title="@string/room05" />
-
-                <item
-                    android:id="@+id/Yoshi"
-                    android:checkable="false"
-                    android:title="@string/room06" />
-
-                <item
-                    android:id="@+id/Wario"
-                    android:checkable="false"
-                    android:title="@string/room07" />
 
 
                 <item
-                    android:id="@+id/Daisy"
+                    android:id="@+id/selection_date"
                     android:checkable="false"
-                    android:title="@string/room08" />
+                    android:title="Sélectionner date" />
 
                 <item
-                    android:id="@+id/Harmonie"
+                    android:id="@+id/selection_salle"
                     android:checkable="false"
-                    android:title="@string/room09" />
+                    android:title="Sélectionner salle">
 
-                <item
-                    android:id="@+id/Pokey"
-                    android:checkable="false"
-                    android:title="@string/room10" />
+                    <menu>
+
+
+                        <item
+                            android:id="@+id/Peach"
+                            android:checkable="false"
+                            android:title="@string/room01" />
+
+                        <item
+                            android:id="@+id/Mario"
+                            android:checkable="false"
+                            android:title="@string/room02" />
+
+                        <item
+                            android:id="@+id/Luigi"
+                            android:checkable="false"
+                            android:title="@string/room03" />
+
+                        <item
+                            android:id="@+id/Toad"
+                            android:checkable="false"
+                            android:title="@string/room04" />
+
+                        <item
+                            android:id="@+id/Bowser"
+                            android:checkable="false"
+                            android:title="@string/room05" />
+
+                        <item
+                            android:id="@+id/Yoshi"
+                            android:checkable="false"
+                            android:title="@string/room06" />
+
+                        <item
+                            android:id="@+id/Wario"
+                            android:checkable="false"
+                            android:title="@string/room07" />
+
+
+                        <item
+                            android:id="@+id/Daisy"
+                            android:checkable="false"
+                            android:title="@string/room08" />
+
+                        <item
+                            android:id="@+id/Harmonie"
+                            android:checkable="false"
+                            android:title="@string/room09" />
+
+                        <item
+                            android:id="@+id/Pokey"
+                            android:checkable="false"
+                            android:title="@string/room10" />
+                    </menu>
+                </item>
+
+
             </menu>
+
+
         </item>
 
 
         <item
-            android:id="@+id/filtre_date_croissante"
+            android:id="@+id/Trier"
             android:checkable="false"
-            android:title="Trier par date croissante"
+            android:title="Trier"
 
-            />
+            >
 
-        <item
-            android:id="@+id/filtre_date_décroissante"
-            android:checkable="false"
-            android:title="Trier par date décroissante" />
+            <menu>
+
+                <item
+                    android:id="@+id/filtre_date_croissante"
+                    android:checkable="false"
+                    android:title="Trier par date croissante"
+
+                    />
+
+                <item
+                    android:id="@+id/filtre_date_décroissante"
+                    android:checkable="false"
+                    android:title="Trier par date décroissante" />
 
 
-        <item
-            android:id="@+id/filtre_salle"
-            android:checkable="false"
-            android:title="Trier par salle" />
+                <item
+                    android:id="@+id/filtre_salle"
+                    android:checkable="false"
+                    android:title="Trier par salle" />
 
+
+            </menu>
+
+
+        </item>
 
 
     </group>
