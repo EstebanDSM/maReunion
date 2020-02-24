@@ -48,7 +48,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-        DummyMeetingApiService.mMeetingsTemp = mMeetings;
+
         final Meeting meeting = mMeetings.get(position);
 
         if (position % 2 == 0) {

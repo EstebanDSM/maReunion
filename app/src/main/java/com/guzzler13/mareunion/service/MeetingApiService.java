@@ -59,7 +59,7 @@ public interface MeetingApiService {
     List<Room> getRooms();
 
 
-    void getMeetingsByDate(DateTime mDate);
+    List<Meeting> getMeetingsByDate(DateTime mDate);
 
 
 }

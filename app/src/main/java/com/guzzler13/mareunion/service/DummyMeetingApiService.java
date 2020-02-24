@@ -16,16 +16,16 @@ import java.util.List;
  */
 public class DummyMeetingApiService implements MeetingApiService {
 
-
-    public static List<Meeting> mMeetingsTemp;
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
     private List<Room> mRooms = RoomGenerator.generateRooms();
+    private List<Meeting> res = new ArrayList<>();
 
     /**
      * {@inheritDoc}
      */
     @Override
     public List<Meeting> getMeetings() {
+
         return mMeetings;
     }
 
@@ -50,6 +50,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByReverseOrderDate() {
+
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o2.getDateBegin().compareTo(o1.getDateBegin());
@@ -63,6 +64,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByRoom() {
+
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o2, Meeting o1) {
                 return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
@@ -73,12 +75,15 @@ public class DummyMeetingApiService implements MeetingApiService {
 
     @Override
     public List<Meeting> getMeetingsFilterRoom(String salle) {
-        List<Meeting> res = new ArrayList<>();
+        if (res != null) {
+            res.clear();
+        }
         for (Meeting m : mMeetings) {
             if (m.getMeetingRoom().getmNameRoom().equals(salle)) {
-                res.add(m);
+              res.add(m);
             }
         }
+
         return res;
     }
 
@@ -88,6 +93,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void deleteMeeting(Meeting meeting) {
+
         mMeetings.remove(meeting);
     }
 
@@ -97,27 +103,37 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void addMeeting(Meeting meeting) {
+
         mMeetings.add(meeting);
     }
 
 
     @Override
     public List<Room> getRooms() {
+
         return mRooms;
     }
 
 
     @Override
-    public void getMeetingsByDate(DateTime mDate) {
-        mMeetingsTemp = mMeetings;
+    public List<Meeting> getMeetingsByDate(DateTime mDate) {
 
-        List<Meeting> res = new ArrayList<>();
+       if (res != null) {
+           res.clear();
+       }
+
         for (Meeting m : mMeetings) {
             if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
+
                 res.add(m);
             }
         }
-        mMeetings.clear();
-        mMeetings.addAll(res);
+
+        return res;
     }
+
+
 }
+
+
+

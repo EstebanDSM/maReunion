@@ -30,6 +30,7 @@ import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.list.MeetingListActivity;
 import com.guzzler13.mareunion.utils.AddChip;
 import com.guzzler13.mareunion.utils.NewMeeting;
+import com.guzzler13.mareunion.utils.SeparateParticipantsByString;
 import com.guzzler13.mareunion.utils.ShowToastAddingMeeting;
 
 import org.joda.time.DateTime;
@@ -245,12 +246,10 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         DateTime mBeginCompleteJoda = new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfMonth(), mBeginTimeEditJoda.getHourOfDay(), mBeginTimeEditJoda.getMinuteOfHour());
                         DateTime mEndCompleteJoda = new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfMonth(), mEndTimeEditJoda.getHourOfDay(), mEndTimeEditJoda.getMinuteOfHour());
 
-                        //Créer la liste des participants sous forme de String séparés par des virgules
+
+                        //Créer la liste des participants dans la liste des réunions sous forme de String séparés par des virgules
                         String mParticipants = "";
-                        for (int i = 0; i < mParticipantsChipGroup.getChildCount(); i++) {
-                            Chip chip = (Chip) mParticipantsChipGroup.getChildAt(i);
-                            mParticipants = chip.getText().toString().concat(", " + mParticipants);
-                        }
+                        SeparateParticipantsByString.separate(mParticipantsChipGroup, mParticipants);
 
 
                         Meeting meeting = NewMeeting.meeting(mApiService, mMeetingName, mDateEditJoda, mBeginTimeEditJoda, mEndTimeEditJoda, mParticipants, mMeetingRoomsSpinner);

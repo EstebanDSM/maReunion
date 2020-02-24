@@ -12,6 +12,7 @@ public class AddChip {
 
         final Chip chip = new Chip(chipgroup.getContext());
         chip.setChipBackgroundColorResource(R.color.colorGrey);
+
         chip.setText(participant);
         chip.setChipIcon(drawable);
         chip.setCheckable(false);
