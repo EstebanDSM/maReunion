@@ -27,36 +27,36 @@ import java.util.List;
 
 public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.ViewHolder> {
 
-    public static boolean isFilterDate = false;
-    public static boolean isFilterRoom = false;
+    public static boolean isListFilterDate = false;
+    public static boolean isListFilterRoom = false;
     public static List<Meeting> filterList = new ArrayList<>();
     private List<Meeting> mMeetings;
 
     MeetingListAdapter(List<Meeting> items) {
 
 
-        //On vide la liste filterList pour chaque filtre
+        //On vide la liste filterList
         filterList.clear();
 
 
         //Si un filtre est déjà activé on le supprime pour les prochains filtres
-        if (isFilterRoom || isFilterDate) {
-            isFilterRoom = false;
-            isFilterDate = false;
+        if (isListFilterRoom || isListFilterDate) {
+            isListFilterRoom = false;
+            isListFilterDate = false;
         }
 
         //si un filtre est activé, on rempli la liste filterList avec les meetings correspondants
         for (Meeting m : items) {
             if (m.isFilterRoom()) {
                 filterList.add(m);
-                isFilterRoom = true;
+                isListFilterRoom = true;
             } else if (m.isFilterDate()) {
                 filterList.add(m);
-                isFilterDate = true;
+                isListFilterDate = true;
             }
         }
 
-        if (isFilterRoom || isFilterDate) {
+        if (isListFilterRoom || isListFilterDate) {
             mMeetings = filterList;
         } else mMeetings = items;
     }
@@ -97,6 +97,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             @Override
             public void onClick(View v) {
                 EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+
             }
         });
 

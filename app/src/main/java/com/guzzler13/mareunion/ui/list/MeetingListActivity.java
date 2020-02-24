@@ -83,6 +83,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
     @Subscribe
     public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
+
         mApiService.deleteMeeting(deleteMeetingEvent.getMeeting());
         mMeetingListAdapter.notifyDataSetChanged();
     }

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-abstract class DummyMeetingGenerator {
+public abstract class DummyMeetingGenerator {
 
     private static final DateTime dateTimeMeeting0 = new DateTime(2020, 2, 25, 10, 0);
     private static final DateTime dateTimeEndMeeting0 = new DateTime(2020, 2, 25, 10, 45);
@@ -27,7 +27,7 @@ abstract class DummyMeetingGenerator {
     private static final DateTime dateTimeEndMeeting6 = new DateTime(2020, 2, 28, 16, 30);
 
 
-    private static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
+    public static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
             new Meeting(0, "Logistique", dateTimeMeeting0, dateTimeEndMeeting0,
                     "McFly@bttf.com", RoomGenerator.generateRooms().get(0), false, false),
             new Meeting(1, "Qualité", dateTimeMeeting1, dateTimeEndMeeting1,

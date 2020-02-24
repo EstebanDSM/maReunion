@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static com.guzzler13.mareunion.ui.list.MeetingListAdapter.isListFilterDate;
+import static com.guzzler13.mareunion.ui.list.MeetingListAdapter.isListFilterRoom;
 import static com.guzzler13.mareunion.utils.AutocompleteTextViewAdapter.Autocomplete;
 import static com.guzzler13.mareunion.utils.TimeUtils.beginTimeHandle;
 import static com.guzzler13.mareunion.utils.TimeUtils.dateHandle;
@@ -128,7 +130,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         // click à partir d'un item
         if (id != -1) {
 
-            if (MeetingListAdapter.isFilterDate || MeetingListAdapter.isFilterRoom) {
+            if (isListFilterDate || isListFilterRoom) {
                 meeting = MeetingListAdapter.filterList.get(id);
             } else {
                 meeting = mApiService.getMeetings().get(id);
