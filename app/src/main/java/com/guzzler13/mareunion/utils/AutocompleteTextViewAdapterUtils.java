@@ -30,7 +30,8 @@ public class AutocompleteTextViewAdapterUtils {
                     imm.hideSoftInputFromWindow(textView.getWindowToken(), 1);
 
                     String participant;
-                    participant = textView.getText().toString();
+                    participant = textView.getText().toString().trim();
+
 
                     /* Vérifier que l'utilisateur renseigne un e-mail */
                     if (!android.util.Patterns.EMAIL_ADDRESS.matcher(participant).matches() || participant.isEmpty()) {

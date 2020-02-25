@@ -46,7 +46,7 @@ public class MeetingServiceTest {
         Meeting meetingToAdded = new Meeting(7, "toto",
                 new DateTime(2021, 12, 25, 10, 0),
                 new DateTime(2021, 12, 25, 10, 0),
-                "moi@blabla", RoomGenerator.generateRooms().get(2), false, false);
+                "moi@blabla", RoomGenerator.generateRooms().get(2));
         mApiService.addMeeting(meetingToAdded);
         assertTrue(mApiService.getMeetings().contains(meetingToAdded));
     }

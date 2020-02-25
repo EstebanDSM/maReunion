@@ -34,6 +34,6 @@
     <string name="item_text_meeting">Réunion 1</string>
     <string name="trash">trash</string>
     <string name="nameRoom">Nom de la salle :</string>
-    <string name="commaParticipants">\", \"</string>
+    <string name="commaParticipants">, </string>
 
 </resources>
