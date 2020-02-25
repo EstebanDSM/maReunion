@@ -16,5 +16,4 @@ public class ToastUtils {
         Toast toast = Toast.makeText(mContext, string, duration);
         toast.show();
     }
-
 }

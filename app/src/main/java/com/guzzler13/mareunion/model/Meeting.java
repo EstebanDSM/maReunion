@@ -11,8 +11,9 @@ public class Meeting {
     private DateTime dateEnd;
     private String participants;
     private Room meetingRoom;
-    private boolean filterDate;
-    private boolean filterRoom;
+
+    /* boolean pour liste filtrée ou liste complète) */
+    private boolean isMeetingInFilterList;
 
     public Meeting(int id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom) {
         this.id = id;
@@ -21,26 +22,18 @@ public class Meeting {
         this.dateEnd = dateEnd;
         this.participants = participants;
         this.meetingRoom = meetingRoom;
-        this.filterRoom = false;
-        this.filterDate = false;
+
+        this.isMeetingInFilterList = false;
 
 
     }
 
-    public boolean isFilterDate() {
-        return filterDate;
+    public boolean isMeetingInFilterList() {
+        return isMeetingInFilterList;
     }
 
-    public void setFilterDate(boolean filterDate) {
-        this.filterDate = filterDate;
-    }
-
-    public boolean isFilterRoom() {
-        return filterRoom;
-    }
-
-    public void setFilterRoom(boolean filterRoom) {
-        this.filterRoom = filterRoom;
+    public void setMeetingInFilterList(boolean isMeetingInFilterList) {
+        this.isMeetingInFilterList = isMeetingInFilterList;
     }
 
     public int getId() {

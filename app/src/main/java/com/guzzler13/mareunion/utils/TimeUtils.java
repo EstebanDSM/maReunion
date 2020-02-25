@@ -12,6 +12,8 @@ import java.util.Calendar;
 
 public class TimeUtils {
 
+    public static CharSequence dateTexte;
+
     public static void beginTimeHandle(final TextView textView, Context context) {
         final Calendar calendar1 = Calendar.getInstance();
 
@@ -24,8 +26,6 @@ public class TimeUtils {
 
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String timeString = hour + " " + minute;
-                textView.setText(timeString);
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.set(Calendar.HOUR_OF_DAY, hour);
                 calendar1.set(Calendar.MINUTE, minute);
@@ -49,8 +49,6 @@ public class TimeUtils {
 
             @Override
             public void onTimeSet(TimePicker timePicker, int hour, int minute) {
-                String timeString = hour + " " + minute;
-                textView.setText(timeString);
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.set(Calendar.HOUR_OF_DAY, hour);
                 calendar1.set(Calendar.MINUTE, minute);
@@ -72,13 +70,11 @@ public class TimeUtils {
 
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int date) {
-                String dateString = year + " " + month + " " + " " + date;
-                textView.setText(dateString);
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.set(Calendar.YEAR, year);
                 calendar1.set(Calendar.MONTH, month);
                 calendar1.set(Calendar.DATE, date);
-                CharSequence dateTexte = DateFormat.format("dd/MM/yyyy", calendar1);
+                dateTexte = DateFormat.format("dd/MM/yyyy", calendar1);
                 textView.setText(dateTexte);
             }
         }, YEAR, MONTH, DATE);

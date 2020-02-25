@@ -36,7 +36,7 @@ public class MeetingListActivity extends AppCompatActivity {
     private MeetingApiService mApiService;
     private RecyclerView.Adapter mMeetingListAdapter;
     private RecyclerView mRecyclerView;
-
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +62,8 @@ public class MeetingListActivity extends AppCompatActivity {
             }
         });
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
     }
 
     @Override
@@ -82,7 +80,6 @@ public class MeetingListActivity extends AppCompatActivity {
 
     @Subscribe
     public void deleteMeeting(DeleteMeetingEvent deleteMeetingEvent) {
-
         mApiService.deleteMeeting(deleteMeetingEvent.getMeeting());
         mMeetingListAdapter.notifyDataSetChanged();
     }
@@ -98,19 +95,16 @@ public class MeetingListActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.filtre_date_croissante:
-                initList(mApiService.getMeetings());
                 mApiService.getMeetingsByOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
             case R.id.filtre_date_décroissante:
-                initList(mApiService.getMeetings());
                 mApiService.getMeetingsByReverseOrderDate();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
 
             case R.id.filtre_salle:
-                initList(mApiService.getMeetings());
                 mApiService.getMeetingsByRoom();
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
@@ -121,50 +115,60 @@ public class MeetingListActivity extends AppCompatActivity {
 
             case R.id.Peach:
                 filterItemRoom("Peach");
+                toolbar.setTitle("Ma réunion - Salle Peach");
                 return true;
 
             case R.id.Mario:
                 filterItemRoom("Mario");
+                toolbar.setTitle("Ma réunion - Salle Mario");
                 return true;
 
             case R.id.Luigi:
                 filterItemRoom("Luigi");
+                toolbar.setTitle("Ma réunion - Salle Luigi");
                 return true;
 
             case R.id.Toad:
                 filterItemRoom("Toad");
+                toolbar.setTitle("Ma réunion - Salle Toad");
                 return true;
 
             case R.id.Bowser:
                 filterItemRoom("Bowser");
+                toolbar.setTitle("Ma réunion - Salle Bowser");
                 return true;
 
             case R.id.Yoshi:
                 filterItemRoom("Yoshi");
+                toolbar.setTitle("Ma réunion - Salle Yoshi");
                 return true;
 
             case R.id.Wario:
                 filterItemRoom("Wario");
+                toolbar.setTitle("Ma réunion - Salle Wario");
                 return true;
 
             case R.id.Daisy:
                 filterItemRoom("Daisy");
+                toolbar.setTitle("Ma réunion - Salle Daisy");
                 return true;
 
             case R.id.Harmonie:
                 filterItemRoom("Harmonie");
+                toolbar.setTitle("Ma réunion - Salle Harmonie");
                 return true;
 
             case R.id.Pokey:
                 filterItemRoom("Pokey");
+                toolbar.setTitle("Ma réunion - Salle Pokey");
                 return true;
 
             case R.id.allSalles:
                 initList(mApiService.getMeetings());
                 mApiService.getMeetings();
+                toolbar.setTitle("Ma réunion");
                 mMeetingListAdapter.notifyDataSetChanged();
                 return true;
-
 
             default:
                 return super.onOptionsItemSelected(item);
@@ -199,6 +203,7 @@ public class MeetingListActivity extends AppCompatActivity {
     }
 
     private void configureDialogCalendar() {
+
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -210,7 +215,6 @@ public class MeetingListActivity extends AppCompatActivity {
     }
 
     private void filterItemRoom(String salle) {
-
 
         boolean nothing = true;
         for (Meeting m : mApiService.getMeetings()) {

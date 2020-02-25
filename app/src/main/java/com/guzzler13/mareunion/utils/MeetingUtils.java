@@ -9,8 +9,8 @@ import com.guzzler13.mareunion.service.MeetingApiService;
 
 import org.joda.time.DateTime;
 
-public class NewMeeting {
-    public static Meeting meeting(MeetingApiService apiservice, TextView textView, DateTime dateTime, DateTime beginTime, DateTime endTime, String participants, Spinner spinner) {
+public class MeetingUtils {
+    public static Meeting newMeeting(MeetingApiService apiservice, TextView textView, DateTime dateTime, DateTime beginTime, DateTime endTime, String participants, Spinner spinner) {
 
         /* Création nouveau meeting */
 
@@ -20,8 +20,6 @@ public class NewMeeting {
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), beginTime.getHourOfDay(), beginTime.getMinuteOfHour()),
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), endTime.getHourOfDay(), endTime.getMinuteOfHour()),
                 participants,
-                new Room(spinner.getSelectedItem().toString(), SetColorMeeting.SetColor(spinner.getSelectedItem().toString())));
+                new Room(spinner.getSelectedItem().toString(), ColorMeetingUtils.SetColor(spinner.getSelectedItem().toString())));
     }
-
-
 }

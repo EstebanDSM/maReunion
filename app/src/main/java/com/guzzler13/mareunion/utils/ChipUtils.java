@@ -6,11 +6,11 @@ import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.guzzler13.mareunion.R;
 
-public class AddChip {
+public class ChipUtils {
 
-    public static Chip addChip(String participant, ChipGroup chipgroup, Drawable drawable) {
+    public static com.google.android.material.chip.Chip addChip(String participant, ChipGroup chipgroup, Drawable drawable) {
 
-        final Chip chip = new Chip(chipgroup.getContext());
+        final com.google.android.material.chip.Chip chip = new com.google.android.material.chip.Chip(chipgroup.getContext());
         chip.setChipBackgroundColorResource(R.color.colorGrey);
 
         chip.setText(participant);

@@ -20,7 +20,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
 import com.guzzler13.mareunion.R;
@@ -29,8 +28,8 @@ import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.list.MeetingListActivity;
 import com.guzzler13.mareunion.ui.list.MeetingListAdapter;
-import com.guzzler13.mareunion.utils.AddChip;
-import com.guzzler13.mareunion.utils.NewMeeting;
+import com.guzzler13.mareunion.utils.ChipUtils;
+import com.guzzler13.mareunion.utils.MeetingUtils;
 import com.guzzler13.mareunion.utils.ToastUtils;
 
 import org.joda.time.DateTime;
@@ -41,15 +40,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
-import static com.guzzler13.mareunion.ui.list.MeetingListAdapter.isListFilterDate;
-import static com.guzzler13.mareunion.ui.list.MeetingListAdapter.isListFilterRoom;
-import static com.guzzler13.mareunion.utils.AutocompleteTextViewAdapter.Autocomplete;
+import static com.guzzler13.mareunion.ui.list.MeetingListAdapter.isListFilter;
+import static com.guzzler13.mareunion.utils.AutocompleteTextViewAdapterUtils.Autocomplete;
 import static com.guzzler13.mareunion.utils.TimeUtils.beginTimeHandle;
 import static com.guzzler13.mareunion.utils.TimeUtils.dateHandle;
 import static com.guzzler13.mareunion.utils.TimeUtils.endTimeHandle;
 
 public class DetailsMeetingActivity extends AppCompatActivity {
-
     private MeetingApiService mApiService = DI.getMeetingApiService();
     private Spinner mMeetingRoomsSpinner;
     private TextView mMeetingName;
@@ -79,6 +76,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         final ArrayList<String> meetingRooms = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.meeting_rooms_arrays)));
         meetingRooms.add(0, getString(R.string.choose_meetingRoom));
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, meetingRooms) {
+
             @Override
             public boolean isEnabled(int position) {
                 // Disable the first item from Spinner, first item will be use for hint
@@ -102,6 +100,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         /* Traitement du menu spinner */
         mMeetingRoomsSpinner.setAdapter(spinnerAdapter);
         mMeetingRoomsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
                 if (position > 0 && view != null) {
@@ -131,12 +130,11 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         if (id != -1) {
 
             Meeting meeting;
-            if (isListFilterDate || isListFilterRoom) {
+            if (isListFilter) {
                 meeting = MeetingListAdapter.filterList.get(id);
             } else {
                 meeting = mApiService.getMeetings().get(id);
             }
-
 
             int position = spinnerAdapter.getPosition(meeting.getMeetingRoom().getmNameRoom());
             mMeetingRoomsSpinner.setSelection(position);
@@ -173,17 +171,17 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             mBeginTimeEdit.setTextColor(getResources().getColor(R.color.colorBlack));
             mEndTimeEdit.setText(hourEnd);
             mEndTimeEdit.setTextColor(getResources().getColor(R.color.colorBlack));
-            mTextParticipants.setText("Nom de la salle :");
+            mTextParticipants.setText(R.string.nameRoom);
             mTextEmails.setHint("Participant(s) :");
             mButtonSave.setVisibility(View.GONE);
             mMeetingRoomsSpinner.setEnabled(false);
             mParticipantsAutoCompleteTextView.setEnabled(false);
             addParticipantButton.setVisibility(View.GONE);
 
-
-            String[] parts = mParticipants.split(", ");
+            /* Récupération des participants en splitant à l'endroit de la virgule */
+            String[] parts = mParticipants.split(getString(R.string.commaParticipants));
             for (String part : parts) {
-                final Chip chip = AddChip.addChip(part, mParticipantsChipGroup, getDrawable(R.drawable.ic_person_pin_black_18dp));
+                final com.google.android.material.chip.Chip chip = ChipUtils.addChip(part, mParticipantsChipGroup, getDrawable(R.drawable.ic_person_pin_black_18dp));
 
                 mParticipantsChipGroup.addView(chip);
                 chip.setCheckable(false);
@@ -196,7 +194,6 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                     }
                 });
             }
-
         } else {
 
             /* click à partir du FLOAT (création meeting) */
@@ -259,7 +256,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         /* Créer la liste des participants dans la liste des réunions sous forme de String séparés par des virgules */
                         String mParticipants = "";
                         for (int i = 0; i < mParticipantsChipGroup.getChildCount(); i++) {
-                            Chip chip = (Chip) mParticipantsChipGroup.getChildAt(i);
+                            com.google.android.material.chip.Chip chip = (com.google.android.material.chip.Chip) mParticipantsChipGroup.getChildAt(i);
                             if (i == 0) {
                                 mParticipants = chip.getText().toString().concat(mParticipants);
                             } else {
@@ -268,8 +265,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         }
 
                         /* Création nouveau meeting */
-                        Meeting meeting = NewMeeting.meeting(mApiService, mMeetingName, mDateEditJoda, mBeginTimeEditJoda, mEndTimeEditJoda, mParticipants, mMeetingRoomsSpinner);
-
+                        Meeting meeting = MeetingUtils.newMeeting(mApiService, mMeetingName, mDateEditJoda, mBeginTimeEditJoda, mEndTimeEditJoda, mParticipants, mMeetingRoomsSpinner);
 
                         /* Gestion de la disponibilité des salles */
                         boolean timeProblem = false;
@@ -293,7 +289,6 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         } else if (reserved) {
 
                             ToastUtils.showToastLong("Cette salle est déjà réservée", getApplicationContext());
-
 
                         } else {
                             mApiService.addMeeting(meeting);

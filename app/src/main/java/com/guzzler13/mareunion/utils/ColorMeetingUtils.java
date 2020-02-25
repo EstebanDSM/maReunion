@@ -4,7 +4,7 @@ import com.guzzler13.mareunion.service.RoomGenerator;
 
 //Donner la bonne couleur à la réunion en fonction du nom de la salle
 
-class SetColorMeeting {
+class ColorMeetingUtils {
 
     static int SetColor(String string) {
 

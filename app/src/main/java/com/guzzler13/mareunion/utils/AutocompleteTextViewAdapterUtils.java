@@ -9,11 +9,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.guzzler13.mareunion.R;
 
-public class AutocompleteTextViewAdapter {
+public class AutocompleteTextViewAdapterUtils {
 
     //AutocompleteTextView + chips to add the participants :
 
@@ -39,8 +38,7 @@ public class AutocompleteTextViewAdapter {
                                 , Toast.LENGTH_SHORT).show();
                     } else {
 
-
-                        final Chip chip = AddChip.addChip(participant, chipgroup, drawable);
+                        final com.google.android.material.chip.Chip chip = ChipUtils.addChip(participant, chipgroup, drawable);
                         chip.setChipBackgroundColorResource(R.color.colorGreen);
                         chipgroup.addView(chip);
                         chip.setOnCloseIconClickListener(new View.OnClickListener() {

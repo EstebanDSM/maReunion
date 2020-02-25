@@ -17,7 +17,9 @@ import java.util.List;
  */
 public class DummyMeetingApiService implements MeetingApiService {
 
+    /* Liste créee pour le retour des méthodes de filtres */
     private List<Meeting> res = new ArrayList<>();
+
     private List<Meeting> mMeetings = DummyMeetingGenerator.generateMeetings();
     private List<Room> mRooms = RoomGenerator.generateRooms();
 
@@ -36,8 +38,8 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByOrderDate() {
-        if (MeetingListAdapter.isListFilterRoom || MeetingListAdapter.isListFilterDate) {
-            Collections.sort(res, new Comparator<Meeting>() {
+        if (MeetingListAdapter.isListFilter) {
+            Collections.sort(MeetingListAdapter.filterList, new Comparator<Meeting>() {
                 public int compare(Meeting o1, Meeting o2) {
                     return o1.getDateBegin().compareTo(o2.getDateBegin());
                 }
@@ -58,11 +60,19 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public void getMeetingsByReverseOrderDate() {
 
-        Collections.sort(mMeetings, new Comparator<Meeting>() {
-            public int compare(Meeting o1, Meeting o2) {
-                return o2.getDateBegin().compareTo(o1.getDateBegin());
-            }
-        });
+        if (MeetingListAdapter.isListFilter) {
+            Collections.sort(MeetingListAdapter.filterList, new Comparator<Meeting>() {
+                public int compare(Meeting o1, Meeting o2) {
+                    return o2.getDateBegin().compareTo(o1.getDateBegin());
+                }
+            });
+        } else {
+            Collections.sort(mMeetings, new Comparator<Meeting>() {
+                public int compare(Meeting o1, Meeting o2) {
+                    return o2.getDateBegin().compareTo(o1.getDateBegin());
+                }
+            });
+        }
     }
 
 
@@ -72,11 +82,20 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
     public void getMeetingsByRoom() {
 
-        Collections.sort(mMeetings, new Comparator<Meeting>() {
-            public int compare(Meeting o2, Meeting o1) {
-                return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
-            }
-        });
+        if (MeetingListAdapter.isListFilter) {
+            Collections.sort(MeetingListAdapter.filterList, new Comparator<Meeting>() {
+                public int compare(Meeting o2, Meeting o1) {
+                    return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
+                }
+            });
+        } else {
+            Collections.sort(mMeetings, new Comparator<Meeting>() {
+                public int compare(Meeting o2, Meeting o1) {
+                    return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
+                }
+            });
+        }
+
 
     }
 
@@ -88,7 +107,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
         for (Meeting m : mMeetings) {
             if (m.getMeetingRoom().getmNameRoom().equals(salle)) {
-                m.setFilterRoom(true);
+                m.setMeetingInFilterList(true);
                 res.add(m);
             }
         }
@@ -138,7 +157,7 @@ public class DummyMeetingApiService implements MeetingApiService {
 
         for (Meeting m : mMeetings) {
             if (m.getDateBegin().toLocalDate().equals(mDate.toLocalDate())) {
-                m.setFilterDate(true);
+                m.setMeetingInFilterList(true);
                 res.add(m);
             }
         }
@@ -150,11 +169,10 @@ public class DummyMeetingApiService implements MeetingApiService {
     public void resetFilter() {
         for (Meeting m : mMeetings) {
             res.clear();
-            m.setFilterDate(false);
-            m.setFilterRoom(false);
+
+            m.setMeetingInFilterList(false);
         }
     }
-
 }
 
 

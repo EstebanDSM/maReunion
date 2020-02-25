@@ -1,6 +1,5 @@
 package com.guzzler13.mareunion.ui.list;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -29,8 +28,8 @@ import java.util.List;
 
 public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.ViewHolder> {
 
-    public static boolean isListFilterDate = false;
-    public static boolean isListFilterRoom = false;
+    public static boolean isListFilter = false;
+
     public static List<Meeting> filterList = new ArrayList<>();
     private List<Meeting> mMeetings;
 
@@ -40,23 +39,20 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         filterList.clear();
 
         //Si un filtre est déjà activé on le supprime pour les prochains filtres
-        if (isListFilterRoom || isListFilterDate) {
-            isListFilterRoom = false;
-            isListFilterDate = false;
+        if (isListFilter) {
+
+            isListFilter = false;
         }
 
         /* si un filtre est activé, on rempli la liste filterList avec les meetings correspondants */
         for (Meeting m : items) {
-            if (m.isFilterRoom()) {
+            if (m.isMeetingInFilterList()) {
                 filterList.add(m);
-                isListFilterRoom = true;
-            } else if (m.isFilterDate()) {
-                filterList.add(m);
-                isListFilterDate = true;
+                isListFilter = true;
             }
         }
 
-        if (isListFilterRoom || isListFilterDate) {
+        if (isListFilter) {
             mMeetings = filterList;
         } else mMeetings = items;
     }
@@ -97,13 +93,13 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             @Override
             public void onClick(View v) {
 
-                if (isListFilterDate || isListFilterRoom) {
+                if (isListFilter) {
                     filterList.remove(meeting);
                     EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
                     notifyDataSetChanged();
 
-                    /*Si liste filtrée vide, lancement activité liste principale*/
-                    if (filterList.isEmpty() && (isListFilterRoom || isListFilterDate)) {
+                    /*Si liste filtrée vide, lancement activité avec liste principale*/
+                    if (filterList.isEmpty() && isListFilter) {
                         Intent intent = new Intent(holder.itemView.getContext(), MeetingListActivity.class);
                         holder.itemView.getContext().startActivity(intent);
                         ToastUtils.showToastShort("La liste filtrée est vide", holder.itemView.getContext());
@@ -130,9 +126,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     @Override
     public int getItemCount() {
-
         return mMeetings.size();
-
     }
 
 
