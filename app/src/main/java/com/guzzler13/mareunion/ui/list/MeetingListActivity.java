@@ -20,10 +20,9 @@ import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.di.DI;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
-import com.guzzler13.mareunion.service.DummyMeetingApiService;
 import com.guzzler13.mareunion.service.MeetingApiService;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
-import com.guzzler13.mareunion.utils.ShowToastAddingMeeting;
+import com.guzzler13.mareunion.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -193,7 +192,7 @@ public class MeetingListActivity extends AppCompatActivity {
                     mMeetingListAdapter.notifyDataSetChanged();
 
                 } else {
-                    ShowToastAddingMeeting.showToast("Aucune réunion de prévue à cette date", getApplicationContext());
+                    ToastUtils.showToastLong("Aucune réunion prévue à cette date", getApplicationContext());
                 }
             }
         };
@@ -217,6 +216,7 @@ public class MeetingListActivity extends AppCompatActivity {
         for (Meeting m : mApiService.getMeetings()) {
             if (m.getMeetingRoom().getmNameRoom().equals(salle)) {
                 nothing = false;
+                break;
             }
         }
         if (!nothing) {
@@ -224,7 +224,7 @@ public class MeetingListActivity extends AppCompatActivity {
             mApiService.getMeetingsFilterRoom(salle);
             mMeetingListAdapter.notifyDataSetChanged();
         } else {
-            ShowToastAddingMeeting.showToast("Aucune réunion de prévue dans cette salle", getApplicationContext());
+            ToastUtils.showToastLong("Aucune réunion de prévue dans cette salle", getApplicationContext());
         }
     }
 

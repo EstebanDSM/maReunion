@@ -17,7 +17,6 @@ public class AutocompleteTextViewAdapter {
 
     //AutocompleteTextView + chips to add the participants :
 
-
     public static void Autocomplete(final AutoCompleteTextView textView, final Context context, Button button, final ChipGroup chipgroup, final Drawable drawable) {
 
 
@@ -34,7 +33,7 @@ public class AutocompleteTextViewAdapter {
                     String participant;
                     participant = textView.getText().toString();
 
-                    // Vérifier que l'utilisateur renseigne un e-mail
+                    /* Vérifier que l'utilisateur renseigne un e-mail */
                     if (!android.util.Patterns.EMAIL_ADDRESS.matcher(participant).matches() || participant.isEmpty()) {
                         Toast.makeText(context, R.string.its_not_an_email_message
                                 , Toast.LENGTH_SHORT).show();
@@ -54,10 +53,7 @@ public class AutocompleteTextViewAdapter {
                     }
                 }
                 textView.setText("");
-
             }
         });
-
     }
-
 }

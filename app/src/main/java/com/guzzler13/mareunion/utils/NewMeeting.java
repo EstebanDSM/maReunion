@@ -12,7 +12,7 @@ import org.joda.time.DateTime;
 public class NewMeeting {
     public static Meeting meeting(MeetingApiService apiservice, TextView textView, DateTime dateTime, DateTime beginTime, DateTime endTime, String participants, Spinner spinner) {
 
-        //Création nouveau meeting
+        /* Création nouveau meeting */
 
         return new Meeting(
                 SetID.SetId(apiservice),

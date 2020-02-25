@@ -1,5 +1,6 @@
 package com.guzzler13.mareunion.ui.list;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.guzzler13.mareunion.R;
 import com.guzzler13.mareunion.events.DeleteMeetingEvent;
 import com.guzzler13.mareunion.model.Meeting;
 import com.guzzler13.mareunion.ui.details.DetailsMeetingActivity;
+import com.guzzler13.mareunion.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -34,10 +36,8 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
 
     MeetingListAdapter(List<Meeting> items) {
 
-
         //On vide la liste filterList
         filterList.clear();
-
 
         //Si un filtre est déjà activé on le supprime pour les prochains filtres
         if (isListFilterRoom || isListFilterDate) {
@@ -45,7 +45,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
             isListFilterDate = false;
         }
 
-        //si un filtre est activé, on rempli la liste filterList avec les meetings correspondants
+        /* si un filtre est activé, on rempli la liste filterList avec les meetings correspondants */
         for (Meeting m : items) {
             if (m.isFilterRoom()) {
                 filterList.add(m);
@@ -96,16 +96,31 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+                AlertDialog.Builder myPopup = new AlertDialog.Builder(holder.itemView.getContext());
 
+                if (isListFilterDate || isListFilterRoom) {
+                    filterList.remove(meeting);
+                    notifyDataSetChanged();
+
+                    /*Si liste filtrée vide, lancement activité liste principale*/
+                    if (filterList.isEmpty() && (isListFilterRoom || isListFilterDate)) {
+                        Intent intent = new Intent(holder.itemView.getContext(), MeetingListActivity.class);
+                        holder.itemView.getContext().startActivity(intent);
+                        ToastUtils.showToastShort("La liste filtrée est vide", holder.itemView.getContext());
+                    }
+
+                } else {
+                    EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
+                }
             }
         });
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(holder.itemView.getContext(), DetailsMeetingActivity.class);
+
+                /*Injection de l'id dans l'intent pour pouvoir récupérer le bon item*/
                 intent.putExtra("id", mMeetings.indexOf(meeting));
 
                 holder.itemView.getContext().startActivity(intent);
@@ -121,7 +136,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout constraintLayout;
         ImageButton mDeleteButton;
         ImageView mImageView;

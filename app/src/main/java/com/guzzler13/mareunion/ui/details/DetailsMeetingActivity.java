@@ -31,7 +31,7 @@ import com.guzzler13.mareunion.ui.list.MeetingListActivity;
 import com.guzzler13.mareunion.ui.list.MeetingListAdapter;
 import com.guzzler13.mareunion.utils.AddChip;
 import com.guzzler13.mareunion.utils.NewMeeting;
-import com.guzzler13.mareunion.utils.ShowToastAddingMeeting;
+import com.guzzler13.mareunion.utils.ToastUtils;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -57,7 +57,6 @@ public class DetailsMeetingActivity extends AppCompatActivity {
     private TextView mBeginTimeEdit;
     private TextView mEndTimeEdit;
     private ChipGroup mParticipantsChipGroup;
-    private Meeting meeting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +75,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         Button addParticipantButton = findViewById(R.id.addParticipant_button);
         Button mButtonSave = findViewById(R.id.saveMetting_button);
 
-        //Spinner to choose meeting room :
+        /* Spinner to choose meeting room : */
         final ArrayList<String> meetingRooms = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.meeting_rooms_arrays)));
         meetingRooms.add(0, getString(R.string.choose_meetingRoom));
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, R.layout.spinner_item, meetingRooms) {
@@ -100,6 +99,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             }
         };
 
+        /* Traitement du menu spinner */
         mMeetingRoomsSpinner.setAdapter(spinnerAdapter);
         mMeetingRoomsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -116,20 +116,21 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             }
         });
 
-        //Affichage toolbar avec flèche retour
+        /* Affichage toolbar avec flèche retour */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 
-        //Autocomplete + chips to add the participants :
+        /* Autocomplete + chips to add the participants : */
         Autocomplete(mParticipantsAutoCompleteTextView, this, addParticipantButton, mParticipantsChipGroup, getDrawable(R.drawable.ic_person_pin_black_18dp));
 
         int id = getIntent().getIntExtra("id", -1);
 
-        // click à partir d'un item
+        /* click à partir d'un item */
         if (id != -1) {
 
+            Meeting meeting;
             if (isListFilterDate || isListFilterRoom) {
                 meeting = MeetingListAdapter.filterList.get(id);
             } else {
@@ -147,7 +148,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
             String hourEnd = meeting.getDateEnd().toString("HH:mm");
             mMeetingName.setText(nameReunion);
 
-            //Taille police mMeetingName suivant taille écran
+            /* Taille police mMeetingName suivant taille écran */
             if ((getResources().getConfiguration().screenLayout &
                     Configuration.SCREENLAYOUT_SIZE_MASK) ==
                     Configuration.SCREENLAYOUT_SIZE_XLARGE) {
@@ -198,7 +199,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
 
         } else {
 
-//             click à partir du FLOAT (création meeting)
+            /* click à partir du FLOAT (création meeting) */
 
             mMeetingName.setHint(R.string.meeting_name);
 
@@ -227,23 +228,23 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    //Gestion des cas où l'utilisateur ne remplit pas tous les champs
+                    /* Gestion des cas où l'utilisateur ne remplit pas tous les champs */
                     if (mMeetingName.getText().toString().equals("")) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP nommer votre réunion", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP nommer votre réunion", getApplicationContext());
                     } else if (mDateEdit.getText().toString().equals("")) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP définir une date", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP définir une date", getApplicationContext());
                     } else if (mBeginTimeEdit.getText().toString().equals("")) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP définir l'heure de début", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP définir l'heure de début", getApplicationContext());
                     } else if (mEndTimeEdit.getText().toString().equals("")) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP définir l'heure de fin", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP définir l'heure de fin", getApplicationContext());
                     } else if (mMeetingRoomsSpinner.getSelectedItem().toString().equals("Veuillez choisir une salle")) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP choisir une salle", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP choisir une salle", getApplicationContext());
                     } else if (mParticipantsChipGroup.getChildCount() == 0) {
-                        ShowToastAddingMeeting.showToast("Veuillez SVP renseigner les adresses mail des participants", getApplicationContext());
+                        ToastUtils.showToastLong("Veuillez SVP renseigner les adresses mail des participants", getApplicationContext());
                     } else {
 
 
-                        //String vers DateTime
+                        /* String vers DateTime */
                         DateTimeFormatter formatterDate = DateTimeFormat.forPattern("dd/MM/yyyy");
                         DateTime mDateEditJoda = formatterDate.parseDateTime(mDateEdit.getText().toString());
 
@@ -255,7 +256,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                         DateTime mEndCompleteJoda = new DateTime(mDateEditJoda.getYear(), mDateEditJoda.getMonthOfYear(), mDateEditJoda.getDayOfMonth(), mEndTimeEditJoda.getHourOfDay(), mEndTimeEditJoda.getMinuteOfHour());
 
 
-                        //Créer la liste des participants dans la liste des réunions sous forme de String séparés par des virgules
+                        /* Créer la liste des participants dans la liste des réunions sous forme de String séparés par des virgules */
                         String mParticipants = "";
                         for (int i = 0; i < mParticipantsChipGroup.getChildCount(); i++) {
                             Chip chip = (Chip) mParticipantsChipGroup.getChildAt(i);
@@ -266,11 +267,11 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                             }
                         }
 
-                        //Création nouveau meeting
+                        /* Création nouveau meeting */
                         Meeting meeting = NewMeeting.meeting(mApiService, mMeetingName, mDateEditJoda, mBeginTimeEditJoda, mEndTimeEditJoda, mParticipants, mMeetingRoomsSpinner);
 
 
-                        //Gestion de la disponibilité des salles
+                        /* Gestion de la disponibilité des salles */
                         boolean timeProblem = false;
                         boolean reserved = false;
                         for (Meeting m : mApiService.getMeetings()) {
@@ -288,10 +289,10 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                             }
                         }
                         if (timeProblem) {
-                            ShowToastAddingMeeting.showToast("Veuillez vérifier les heures de début et de fin", getApplicationContext());
+                            ToastUtils.showToastLong("Veuillez vérifier les heures de début et de fin", getApplicationContext());
                         } else if (reserved) {
 
-                            ShowToastAddingMeeting.showToast("Cette salle est déjà réservée", getApplicationContext());
+                            ToastUtils.showToastLong("Cette salle est déjà réservée", getApplicationContext());
 
 
                         } else {
@@ -305,7 +306,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
         }
     }
 
-    // La flèche sur la toolbar a le même comportement que la touche BACK du téléphone
+    /* La flèche sur la toolbar a le même comportement que la touche BACK du téléphone */
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
