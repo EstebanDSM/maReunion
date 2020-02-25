@@ -14,15 +14,15 @@ public class Meeting {
     private boolean filterDate;
     private boolean filterRoom;
 
-    public Meeting(int id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom, boolean filterDate, boolean filterRoom) {
+    public Meeting(int id, String name, DateTime dateBegin, DateTime dateEnd, String participants, Room meetingRoom) {
         this.id = id;
         this.name = name;
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
         this.participants = participants;
         this.meetingRoom = meetingRoom;
-        this.filterRoom = filterRoom;
-        this.filterDate = filterDate;
+        this.filterRoom = false;
+        this.filterDate = false;
 
 
     }

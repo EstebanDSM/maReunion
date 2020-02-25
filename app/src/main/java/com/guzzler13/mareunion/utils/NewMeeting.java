@@ -15,12 +15,12 @@ public class NewMeeting {
         /* Création nouveau meeting */
 
         return new Meeting(
-                SetID.SetId(apiservice),
+                IdUtils.SetId(apiservice),
                 textView.getText().toString(),
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), beginTime.getHourOfDay(), beginTime.getMinuteOfHour()),
                 new DateTime(dateTime.getYear(), dateTime.getMonthOfYear(), dateTime.getDayOfMonth(), endTime.getHourOfDay(), endTime.getMinuteOfHour()),
                 participants,
-                new Room(spinner.getSelectedItem().toString(), SetColorMeeting.SetColor(spinner.getSelectedItem().toString())), false, false);
+                new Room(spinner.getSelectedItem().toString(), SetColorMeeting.SetColor(spinner.getSelectedItem().toString())));
     }
 
 

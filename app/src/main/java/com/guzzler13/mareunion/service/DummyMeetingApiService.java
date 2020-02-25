@@ -36,7 +36,6 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByOrderDate() {
-
         if (MeetingListAdapter.isListFilterRoom || MeetingListAdapter.isListFilterDate) {
             Collections.sort(res, new Comparator<Meeting>() {
                 public int compare(Meeting o1, Meeting o2) {
@@ -50,8 +49,6 @@ public class DummyMeetingApiService implements MeetingApiService {
                 }
             });
         }
-
-
     }
 
 
@@ -60,7 +57,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByReverseOrderDate() {
-//        resetFilter();
+
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o2.getDateBegin().compareTo(o1.getDateBegin());
@@ -74,7 +71,7 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void getMeetingsByRoom() {
-//        resetFilter();
+
         Collections.sort(mMeetings, new Comparator<Meeting>() {
             public int compare(Meeting o2, Meeting o1) {
                 return o1.getMeetingRoom().getmRoomColor() - (o2.getMeetingRoom().getmRoomColor());
@@ -86,6 +83,7 @@ public class DummyMeetingApiService implements MeetingApiService {
     @Override
 
     public List<Meeting> getMeetingsFilterRoom(String salle) {
+
         resetFilter();
 
         for (Meeting m : mMeetings) {
@@ -104,7 +102,9 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void deleteMeeting(Meeting meeting) {
+
         resetFilter();
+
         mMeetings.remove(meeting);
     }
 
@@ -114,14 +114,18 @@ public class DummyMeetingApiService implements MeetingApiService {
      */
     @Override
     public void addMeeting(Meeting meeting) {
+
         resetFilter();
+
         mMeetings.add(meeting);
     }
 
 
     @Override
     public List<Room> getRooms() {
+
         resetFilter();
+
         return mRooms;
     }
 
@@ -138,20 +142,16 @@ public class DummyMeetingApiService implements MeetingApiService {
                 res.add(m);
             }
         }
-
         return res;
     }
 
 
     @Override
     public void resetFilter() {
-
         for (Meeting m : mMeetings) {
             res.clear();
             m.setFilterDate(false);
             m.setFilterRoom(false);
-
-
         }
     }
 

@@ -96,10 +96,10 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         holder.mDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder myPopup = new AlertDialog.Builder(holder.itemView.getContext());
 
                 if (isListFilterDate || isListFilterRoom) {
                     filterList.remove(meeting);
+                    EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
                     notifyDataSetChanged();
 
                     /*Si liste filtrée vide, lancement activité liste principale*/

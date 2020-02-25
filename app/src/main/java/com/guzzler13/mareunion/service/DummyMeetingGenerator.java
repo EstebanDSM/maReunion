@@ -29,19 +29,19 @@ public abstract class DummyMeetingGenerator {
 
     public static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
             new Meeting(0, "Logistique", dateTimeMeeting0, dateTimeEndMeeting0,
-                    "McFly@bttf.com", RoomGenerator.generateRooms().get(0), false, false),
+                    "McFly@bttf.com", RoomGenerator.generateRooms().get(0)),
             new Meeting(1, "Qualité", dateTimeMeeting1, dateTimeEndMeeting1,
-                    "lucas@boulik.com, dark.vador@starwars.com, toto@smiley.com, abc123@jacksonFive.com", RoomGenerator.generateRooms().get(1), false, false),
+                    "lucas@boulik.com, dark.vador@starwars.com, toto@smiley.com, abc123@jacksonFive.com", RoomGenerator.generateRooms().get(1)),
             new Meeting(2, "Réception", dateTimeMeeting2, dateTimeEndMeeting2,
-                    "doc@bttf.com", RoomGenerator.generateRooms().get(2), false, false),
+                    "doc@bttf.com", RoomGenerator.generateRooms().get(2)),
             new Meeting(3, "Expédition", dateTimeMeeting3, dateTimeEndMeeting3,
-                    "sarah.connor@inyourface.com", RoomGenerator.generateRooms().get(3), false, false),
+                    "sarah.connor@inyourface.com", RoomGenerator.generateRooms().get(3)),
             new Meeting(4, "Noël", dateTimeMeeting4, dateTimeEndMeeting4,
-                    "skywalker@starwars.es", RoomGenerator.generateRooms().get(4), false, false),
+                    "skywalker@starwars.es", RoomGenerator.generateRooms().get(4)),
             new Meeting(5, "Production", dateTimeMeeting5, dateTimeEndMeeting5,
-                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(2), false, false),
+                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(2)),
             new Meeting(6, "Achats", dateTimeMeeting6, dateTimeEndMeeting6,
-                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(7), false, false)
+                    "Jenifer@bttf.com", RoomGenerator.generateRooms().get(7))
     );
 
 

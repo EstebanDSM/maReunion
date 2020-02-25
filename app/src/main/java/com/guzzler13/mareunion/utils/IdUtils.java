@@ -4,7 +4,7 @@ import com.guzzler13.mareunion.service.MeetingApiService;
 
 //Associer un nouvel ID à chaque nouvelle réunion créée
 
-class SetID {
+class IdUtils {
 
     static int SetId(MeetingApiService meetingApiService) {
         int id = 0;
