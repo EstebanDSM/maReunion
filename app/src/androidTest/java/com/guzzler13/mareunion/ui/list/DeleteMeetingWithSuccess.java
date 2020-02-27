@@ -23,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -41,12 +42,17 @@ public class DeleteMeetingWithSuccess {
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
     private MeetingApiService service;
+    private MeetingApiService serviceOfThread;
 
     @Test
     public void deleteMeeting() {
 
         service = DI.getNewInstanceApiService();
+        serviceOfThread = DI.getMeetingApiService();
         int size = service.getMeetings().size();
+
+        List<Meeting> listWithMeetingDeleted = new ArrayList<>();
+        listWithMeetingDeleted.add(service.getMeetings().get(6));
 
 
         ViewInteraction appCompatImageButton = onView(
@@ -73,6 +79,9 @@ public class DeleteMeetingWithSuccess {
 
         List<Meeting> afterDelete = DI.getMeetingApiService().getMeetings();
         assertEquals(size - 1, afterDelete.size());
+
+        serviceOfThread.getMeetings().addAll(listWithMeetingDeleted);
+
     }
 
     private static Matcher<View> childAtPosition(

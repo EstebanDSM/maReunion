@@ -11,57 +11,67 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.guzzler13.mareunion.R;
-import com.guzzler13.mareunion.di.DI;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.RootMatchers.withDecorView;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class GoodNameOfMeeting {
+public class CreateMeetingWhithoutNameShouldDiplayMessage {
 
     @Rule
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
 
-
     @Test
-    public void goodNameOfMeeting() {
-
-        ViewInteraction constraintLayout = onView(
-                allOf(withId(R.id.constraint_layout),
-                        childAtPosition(
-                                allOf(withId(R.id.list_meetings),
-                                        childAtPosition(
-                                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                                1)),
-                                0),
-                        isDisplayed()));
-        constraintLayout.perform(click());
-
-        ViewInteraction editText = onView(
-                allOf(withId(R.id.meetingName_editText), withText("Logistique"),
+    public void createMeetingWhithoutName() {
+        ViewInteraction floatingActionButton = onView(
+                allOf(withId(R.id.btnFab),
                         childAtPosition(
                                 childAtPosition(
-                                        withId(R.id.meetingName_TextInputLayout),
+                                        withId(android.R.id.content),
                                         0),
-                                0),
+                                2),
                         isDisplayed()));
-        editText.check(matches(withText("Logistique")));
+        floatingActionButton.perform(click());
+
+        ViewInteraction materialButton = onView(
+                allOf(withId(R.id.saveMetting_button), withText("Enregistrer"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.LinearLayout")),
+                                        1),
+                                0)));
+        materialButton.perform(scrollTo(), click());
+
+        onView(withText("Veuillez SVP nommer votre réunion")).inRoot(withDecorView(not(is(mActivityTestRule.
+                getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+        // Added a sleep statement to match the app's execution delay.
+        // The recommended way to handle such scenarios is to use Espresso idling resources:
+        // https://google.github.io/android-testing-support-library/docs/espresso/idling-resource/index.html
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private static Matcher<View> childAtPosition(
