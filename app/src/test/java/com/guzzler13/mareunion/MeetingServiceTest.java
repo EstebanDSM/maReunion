@@ -16,6 +16,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -53,9 +54,13 @@ public class MeetingServiceTest {
 
     @Test
     public void deleMeeting() {
+
+        int size = DI.getNewInstanceApiService().getMeetings().size();
+
         Meeting meetingToDelete = mApiService.getMeetings().get(1);
         mApiService.deleteMeeting(meetingToDelete);
         assertFalse(mApiService.getMeetings().contains(meetingToDelete));
+        assertNotEquals(size, mApiService.getMeetings().size());
     }
 
     @Test

@@ -281,6 +281,7 @@ public class DetailsMeetingActivity extends AppCompatActivity {
                                 reserved = true;
                                 break;
                             } else if (mBeginCompleteJoda.isAfter(mEndCompleteJoda) || mBeginCompleteJoda.isEqual(mEndCompleteJoda)) {
+
                                 timeProblem = true;
                             }
                         }

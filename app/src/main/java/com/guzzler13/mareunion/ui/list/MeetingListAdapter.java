@@ -53,9 +53,9 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         }
 
         if (isListFilter) {
-            mMeetings = filterList;
-        } else mMeetings = items;
-    }
+        mMeetings = filterList;
+    } else mMeetings = items;
+}
 
     @NonNull
     @Override
