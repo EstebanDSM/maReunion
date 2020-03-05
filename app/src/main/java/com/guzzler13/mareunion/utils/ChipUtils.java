@@ -2,7 +2,6 @@ package com.guzzler13.mareunion.utils;
 
 import android.graphics.drawable.Drawable;
 
-import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.guzzler13.mareunion.R;
 

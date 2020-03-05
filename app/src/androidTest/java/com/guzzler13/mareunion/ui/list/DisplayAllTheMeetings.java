@@ -7,8 +7,6 @@ import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 
 import com.guzzler13.mareunion.R;
-import com.guzzler13.mareunion.di.DI;
-import com.guzzler13.mareunion.service.MeetingApiService;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -17,7 +15,6 @@ import org.junit.runner.RunWith;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
-import static androidx.test.espresso.matcher.ViewMatchers.hasMinimumChildCount;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -27,13 +24,11 @@ public class DisplayAllTheMeetings {
     public ActivityTestRule<MeetingListActivity> mActivityTestRule = new ActivityTestRule<>(MeetingListActivity.class);
 
 
-
-
     @Test
     public void displayAllTheMeetings() {
 
-            onView(ViewMatchers.withId(R.id.list_meetings))
-                    .check(matches(hasChildCount(7)));
+        onView(ViewMatchers.withId(R.id.list_meetings))
+                .check(matches(hasChildCount(7)));
 
     }
 }
