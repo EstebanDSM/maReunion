@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ma réunion</string>
+    <string name="app_name">Ma réu</string>
     <string name="by_date">Par date</string>
     <string name="by_place">Par lieu</string>
     <string name="save_button">Enregistrer</string>
