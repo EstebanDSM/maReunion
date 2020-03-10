@@ -183,7 +183,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
                 DateTime time = new DateTime(year, monthOfYear + 1, dayOfMonth, 00, 00);
 
-
+                /* Filtre par date */
                 boolean nothing = true;
                 for (Meeting m : mApiService.getMeetings()) {
                     if (m.getDateBegin().toLocalDate().equals(time.toLocalDate())) {
@@ -216,6 +216,7 @@ public class MeetingListActivity extends AppCompatActivity {
 
     private void filterItemRoom(String salle) {
 
+        /* Filtre par salle */
         boolean nothing = true;
         for (Meeting m : mApiService.getMeetings()) {
             if (m.getMeetingRoom().getmNameRoom().equals(salle)) {

@@ -79,6 +79,6 @@ public class MeetingServiceTest {
     @Test
     public void getMeetingFilterDate() {
         String expectedMeetings = DummyMeetingGenerator.DUMMY_MEETINGS.get(2).getMeetingRoom().getmNameRoom();
-        assertEquals(mApiService.getMeetingsByDate(new DateTime(2020, 2, 24, 0, 0)).get(0).getMeetingRoom().getmNameRoom(), expectedMeetings);
+        assertEquals(mApiService.getMeetingsByDate(new DateTime(2020, 3, 24, 0, 0)).get(0).getMeetingRoom().getmNameRoom(), expectedMeetings);
     }
 }

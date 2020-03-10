@@ -12,7 +12,7 @@ import java.util.Calendar;
 
 public class TimeUtils {
 
-    public static CharSequence dateTexte;
+    private static CharSequence dateTexte;
 
     public static void beginTimeHandle(final TextView textView, Context context) {
         final Calendar calendar1 = Calendar.getInstance();

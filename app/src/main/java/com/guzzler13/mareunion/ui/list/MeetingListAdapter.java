@@ -57,6 +57,11 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         } else mMeetings = items;
     }
 
+
+    /* Première méthode RecyclerView : Renvoie le ViewHolder en prenant son constructeur pour le fabriquer
+    *
+    *  Cette Méthode convertit le XML représentant un item en java afin de le rendre exploitable dans le code */
+
     @NonNull
     @Override
     public MeetingListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,12 +72,19 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
     }
 
 
+    /* Seconde Méthode : prend en paramètre le ViewHolder et la position de l'élément
+    *
+    *  Cette méthode permet de définir ce qui sera affiché pour chaque item, et c'est ici que l'on dit ce qu'il se passera au click sur un élément de l'item (méthode onClick)
+    *
+    * Pour chaque élément, grâce au ViewHolder qui récupère tous les champs de l'item, on peut leur affecter les valeurs des propriétés de la classe Meeting */
+
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
 
         final Meeting meeting = mMeetings.get(position);
 
+        /* Un item sur deux d'une couleur différente */
         if (position % 2 == 0) {
             holder.constraintLayout.setBackgroundColor(Color.parseColor("#DCDCDC"));
         } else {
@@ -105,6 +117,7 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
                         ToastUtils.showToastShort("La liste filtrée est vide", holder.itemView.getContext());
                     }
 
+                    /* Sinon on se sert de l'event DeleteMeetingEvent */
                 } else {
                     EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
                 }
@@ -124,6 +137,8 @@ public class MeetingListAdapter extends RecyclerView.Adapter<MeetingListAdapter.
         });
     }
 
+
+    /* 3ème méthode RecyclerView : Récupère le nombre d'éléments */
     @Override
     public int getItemCount() {
         return mMeetings.size();

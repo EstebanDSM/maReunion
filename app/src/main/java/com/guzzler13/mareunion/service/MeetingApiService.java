@@ -37,19 +37,19 @@ public interface MeetingApiService {
 
 
     /**
-     * Get all Meetings in order of Rooms
+     * Get all Meetings in order of Rooms (liste triée)
      */
     void getMeetingsByRoom();
 
 
     /**
-     * Get all Meetings in order of Rooms
+     * Get all Meetings in order of Rooms (liste filtrée)
      */
     List<Meeting> getMeetingsFilterRoom(String salle);
 
 
     /**
-     * Add a Favorite
+     * Add meeting
      *
      * @param meeting
      */
@@ -58,7 +58,7 @@ public interface MeetingApiService {
 
     List<Room> getRooms();
 
-
+    /* liste filtrée par salle */
     List<Meeting> getMeetingsByDate(DateTime mDate);
 
 

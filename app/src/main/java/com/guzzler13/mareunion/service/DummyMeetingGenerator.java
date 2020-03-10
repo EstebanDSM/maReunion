@@ -27,6 +27,7 @@ public abstract class DummyMeetingGenerator {
     private static final DateTime dateTimeEndMeeting6 = new DateTime(2020, 3, 28, 16, 30);
 
 
+
     public static final List<Meeting> DUMMY_MEETINGS = Arrays.asList(
             new Meeting(0, "Logistique", dateTimeMeeting0, dateTimeEndMeeting0,
                     "McFly@bttf.com", RoomGenerator.generateRooms().get(0)),

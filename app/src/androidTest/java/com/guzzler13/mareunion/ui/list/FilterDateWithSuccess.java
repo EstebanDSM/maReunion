@@ -125,7 +125,7 @@ public class FilterDateWithSuccess {
         appCompatTextView2.perform(click());
 
 
-        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2020, 2, 24));
+        onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(2020, 3, 24));
 
         ViewInteraction materialButton2 = onView(
                 allOf(withId(android.R.id.button1), withText("OK"),
@@ -179,7 +179,5 @@ public class FilterDateWithSuccess {
                                 2),
                         isDisplayed()));
         textView3.check(matches(withText("doc@bttf.com")));
-
-
     }
 }
